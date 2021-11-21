@@ -1,24 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BertScout2022.MainPage">
-
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+             x:Class="BertScout2022.MainPage"
+             Title="BERT 133 Scouting - 2022">
+    
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical"
+            Margin="0"
+            BackgroundColor="White">
+            <Frame
+                BackgroundColor="#007F00"
+                Margin="0,0,0,0"
+                Padding="10,4,10,4"
+                CornerRadius="0"
+                >
+                <Grid>
+                    <Button
+                        Text=". . ."
+                        TextColor="Black"
+                        HorizontalOptions="Start" 
+                        FontSize="Small"
+                        WidthRequest="50"
+                        Margin="0"
+                        BorderWidth="1"
+                        BorderColor="Black"
+                        CornerRadius="10"
+                        />
+                    <Label
+                        Text="BERT 133 Scouting - 2022"
+                        HorizontalOptions="Center"
+                        TextColor="White" 
+                        FontSize="Title"
+                        Margin="0"
+                        VerticalOptions="Center"
+                        />
+                </Grid>
+            </Frame>
+            <ScrollView
+                BackgroundColor="White"
+                VerticalOptions="FillAndExpand"
+                Margin="0"
+                Padding="10,0,0,10">
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="Start">
+                    <Label
+                        Text="Team"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        Margin="10,6,0,0"
+                        />
+                    <Entry
+                        WidthRequest="90"
+                        FontSize="Medium"
+                        BackgroundColor="White"
+                        TextColor="Black"
+                        Keyboard="Numeric"
+                        Margin="0,0,0,0"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Start"
+                        Text="9999"
+                        MaxLength="4"
+                        />
+                    <Label
+                        Text="Match"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        Margin="10,6,0,0"
+                        />
+                    <Entry
+                        WidthRequest="70"
+                        FontSize="Medium"
+                        BackgroundColor="White"
+                        TextColor="Black"
+                        Keyboard="Numeric"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Start"
+                        Margin="0,0,0,0"
+                        Text="999"
+                        MaxLength="3"
+                        />
+                    <Button
+                        Text="Save"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        BackgroundColor="Green"
+                        HorizontalOptions="EndAndExpand"
+                        Margin="0,0,0,0"
+                        BorderWidth="1"
+                        BorderColor="Black"
+                        CornerRadius="10"
+                        />
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>
