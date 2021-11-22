@@ -3,7 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BertScout2022.MainPage"
              Title="BERT 133 Scouting - 2022">
-    
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="#007F00" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout
             Orientation="Vertical"
@@ -18,21 +39,14 @@
                 <Grid>
                     <Button
                         Text=". . ."
-                        TextColor="Black"
-                        HorizontalOptions="Start" 
+                        HorizontalOptions="Start"
                         FontSize="Small"
-                        WidthRequest="50"
-                        Margin="0"
-                        BorderWidth="1"
-                        BorderColor="Black"
-                        CornerRadius="10"
+                        BackgroundColor="White"
                         />
                     <Label
                         Text="BERT 133 Scouting - 2022"
                         HorizontalOptions="Center"
                         TextColor="White" 
-                        FontSize="Title"
-                        Margin="0"
                         VerticalOptions="Center"
                         />
                 </Grid>
@@ -47,50 +61,35 @@
                     VerticalOptions="Start">
                     <Label
                         Text="Team"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        Margin="10,6,0,0"
+                        Margin="10,0,0,0"
+                        VerticalOptions="Center"
                         />
                     <Entry
                         WidthRequest="90"
-                        FontSize="Medium"
-                        BackgroundColor="White"
-                        TextColor="Black"
+                        HorizontalTextAlignment="End"
                         Keyboard="Numeric"
-                        Margin="0,0,0,0"
-                        HorizontalTextAlignment="Start"
-                        VerticalTextAlignment="Start"
                         Text="9999"
                         MaxLength="4"
                         />
                     <Label
                         Text="Match"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        Margin="10,6,0,0"
+                        Margin="10,0,0,0"
+                        VerticalOptions="Center"
                         />
                     <Entry
                         WidthRequest="70"
-                        FontSize="Medium"
-                        BackgroundColor="White"
-                        TextColor="Black"
                         Keyboard="Numeric"
-                        HorizontalTextAlignment="Start"
-                        VerticalTextAlignment="Start"
-                        Margin="0,0,0,0"
+                        HorizontalTextAlignment="End"
                         Text="999"
                         MaxLength="3"
                         />
-                    <Button
-                        Text="Save"
-                        TextColor="Black"
-                        FontSize="Medium"
-                        BackgroundColor="Green"
-                        HorizontalOptions="EndAndExpand"
-                        Margin="0,0,0,0"
-                        BorderWidth="1"
-                        BorderColor="Black"
-                        CornerRadius="10"
+                    <Label
+                        Text="Scouter"
+                        Margin="10,0,0,0"
+                        VerticalOptions="Center"
+                        />
+                    <Entry
+                        HorizontalOptions="FillAndExpand"
                         />
                 </StackLayout>
             </ScrollView>
