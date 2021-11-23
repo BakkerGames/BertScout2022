@@ -44,6 +44,8 @@
                         x:Name="MenuButton"
                         Clicked="MenuButton_Clicked"
                         Text=". . ."
+                        WidthRequest="50"
+                        HeightRequest="36"
                         HorizontalOptions="Start"
                         FontSize="Small"
                         BackgroundColor="White"
@@ -69,10 +71,11 @@
                         x:Name="MatchEntryHeader"
                         IsEnabled="True"
                         Orientation="Horizontal"
-                        VerticalOptions="Start">
+                        VerticalOptions="Start"
+                        >
                         <Label       
                             Text="Team"
-                            Margin="10,0,0,0"
+                            Margin="0,0,0,0"
                             VerticalOptions="Center"
                         />
                         <Entry
@@ -101,6 +104,7 @@
                         />
                         <Entry
                             HorizontalOptions="FillAndExpand"
+                            Margin="0,0,10,0"
                         />
                     </StackLayout>
                     <StackLayout
@@ -111,26 +115,29 @@
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="Autonomous"
-                            Margin="10,0,0,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
+                        <!--add auto fields here-->
                         <Label
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="Teleoperated"
-                            Margin="10,0,0,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
+                        <!--add teleop fields here-->
                         <Label
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="End Game"
-                            Margin="10,0,0,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
+                        <!--add end game fields here-->
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
