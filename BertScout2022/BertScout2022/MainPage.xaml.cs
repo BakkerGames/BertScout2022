@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace BertScout2022
@@ -13,6 +8,23 @@ namespace BertScout2022
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void MenuButton_Clicked(object sender, EventArgs e)
+        {
+            bool matchScreen = !MatchEntryView.IsVisible;
+            if (matchScreen)
+            {
+                MatchEntryView.IsVisible = true;
+                MatchEntryView.IsEnabled = true;
+                MenuButton.Text = ". . .";
+            }
+            else
+            {
+                MatchEntryView.IsVisible = false;
+                MatchEntryView.IsEnabled = false;
+                MenuButton.Text = "\u25c0\u2013"; // <--
+            }
         }
     }
 }

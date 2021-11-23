@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BertScout2022.MainPage"
              Title="BERT 133 Scouting - 2022">
+    
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="Margin" Value="0" />
+            <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
         <Style TargetType="Button">
             <Setter Property="TextColor" Value="Black" />
@@ -20,11 +21,13 @@
         </Style>
         <Style TargetType="Entry">
             <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="White" />
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="Margin" Value="0" />
             <Setter Property="HorizontalTextAlignment" Value="Start" />
         </Style>
     </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout
             Orientation="Vertical"
@@ -38,6 +41,8 @@
                 >
                 <Grid>
                     <Button
+                        x:Name="MenuButton"
+                        Clicked="MenuButton_Clicked"
                         Text=". . ."
                         HorizontalOptions="Start"
                         FontSize="Small"
@@ -52,45 +57,81 @@
                 </Grid>
             </Frame>
             <ScrollView
+                x:Name="MatchEntryView"
+                IsVisible="True"
+                IsEnabled="True"
                 BackgroundColor="White"
                 VerticalOptions="FillAndExpand"
                 Margin="0"
                 Padding="10,0,0,10">
-                <StackLayout
-                    Orientation="Horizontal"
-                    VerticalOptions="Start">
-                    <Label
-                        Text="Team"
-                        Margin="10,0,0,0"
-                        VerticalOptions="Center"
+                <StackLayout Orientation="Vertical">
+                    <StackLayout
+                        x:Name="MatchEntryHeader"
+                        IsEnabled="True"
+                        Orientation="Horizontal"
+                        VerticalOptions="Start">
+                        <Label       
+                            Text="Team"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
                         />
-                    <Entry
-                        WidthRequest="90"
-                        HorizontalTextAlignment="End"
-                        Keyboard="Numeric"
-                        Text="9999"
-                        MaxLength="4"
+                        <Entry
+                            WidthRequest="90"
+                            HorizontalTextAlignment="End"
+                            Keyboard="Numeric"
+                            Text=""
+                            MaxLength="4"
                         />
-                    <Label
-                        Text="Match"
-                        Margin="10,0,0,0"
-                        VerticalOptions="Center"
+                        <Label 
+                            Text="Match"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
                         />
-                    <Entry
-                        WidthRequest="70"
-                        Keyboard="Numeric"
-                        HorizontalTextAlignment="End"
-                        Text="999"
-                        MaxLength="3"
+                        <Entry
+                            WidthRequest="70"
+                            Keyboard="Numeric"
+                            HorizontalTextAlignment="End"
+                            Text=""
+                            MaxLength="3"
                         />
-                    <Label
-                        Text="Scouter"
-                        Margin="10,0,0,0"
-                        VerticalOptions="Center"
+                        <Label
+                            Text="Scouter"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
                         />
-                    <Entry
-                        HorizontalOptions="FillAndExpand"
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
                         />
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="MatchEntryBody"
+                        Orientation="Vertical"
+                        >
+                        <Label
+                            BackgroundColor="#007F00"
+                            TextColor="White"
+                            Text="Autonomous"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                        />
+                        <Label
+                            BackgroundColor="#007F00"
+                            TextColor="White"
+                            Text="Teleoperated"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                        />
+                        <Label
+                            BackgroundColor="#007F00"
+                            TextColor="White"
+                            Text="End Game"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                        />
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
