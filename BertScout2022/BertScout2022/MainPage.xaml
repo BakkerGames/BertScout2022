@@ -5,27 +5,6 @@
              Title="BERT 133 Scouting - 2022">
     
     <ContentPage.Resources>
-        <Style TargetType="Label">
-            <Setter Property="TextColor" Value="Black" />
-            <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="Margin" Value="10,0,0,0" />
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="TextColor" Value="Black" />
-            <Setter Property="BackgroundColor" Value="#007F00" />
-            <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="BorderWidth" Value="1" />
-            <Setter Property="BorderColor" Value="Black" />
-            <Setter Property="CornerRadius" Value="5" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-        <Style TargetType="Entry">
-            <Setter Property="TextColor" Value="Black" />
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="HorizontalTextAlignment" Value="Start" />
-        </Style>
     </ContentPage.Resources>
     
     <ContentPage.Content>
@@ -48,7 +27,7 @@
                         HeightRequest="36"
                         HorizontalOptions="Start"
                         FontSize="Small"
-                        BackgroundColor="White"
+                        BackgroundColor="#007F00"
                         />
                     <Label
                         Text="BERT 133 Scouting - 2022"
