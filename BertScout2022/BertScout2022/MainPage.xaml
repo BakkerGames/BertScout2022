@@ -27,7 +27,7 @@
                         HeightRequest="36"
                         HorizontalOptions="Start"
                         FontSize="Small"
-                        BackgroundColor="White"
+                        BackgroundColor="#007F00"
                         />
                     <Label
                         Text="BERT 133 Scouting - 2022"
@@ -94,7 +94,7 @@
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="Autonomous"
-                            Margin="0,10,10,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
@@ -107,7 +107,7 @@
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="Teleoperated"
-                            Margin="0,10,10,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
@@ -116,7 +116,7 @@
                             BackgroundColor="#007F00"
                             TextColor="White"
                             Text="End Game"
-                            Margin="0,10,10,0"
+                            Margin="0,0,10,0"
                             VerticalOptions="Center"
                             HorizontalTextAlignment="Center"
                         />
