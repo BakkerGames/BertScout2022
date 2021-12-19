@@ -25,5 +25,16 @@
             <Setter Property="Margin" Value="0" />
             <Setter Property="HorizontalTextAlignment" Value="Start" />
         </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="IsChecked" Value="False" />
+            <Setter Property="Color" Value="Black" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="IsChecked" Value="False" />
+        </Style>
     </Application.Resources>
 </Application>

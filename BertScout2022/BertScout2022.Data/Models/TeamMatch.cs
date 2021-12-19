@@ -30,9 +30,10 @@ namespace BertScout2022.Data.Models
 
         // overall
         public bool Won { get; set; }
-        public bool Draw { get; set; }
+        public bool Tied { get; set; }
         public bool Lost { get; set; }
         public bool SpecialRP1 { get; set; }
         public bool SpecialRP2 { get; set; }
+        public string Comments { get; set; }
     }
 }

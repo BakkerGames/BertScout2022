@@ -22,18 +22,28 @@
                     <Button
                         x:Name="MenuButton"
                         Clicked="MenuButton_Clicked"
-                        Text=". . ."
-                        WidthRequest="50"
+                        Text="Menu"
+                        WidthRequest="100"
                         HeightRequest="36"
                         HorizontalOptions="Start"
                         FontSize="Small"
-                        BackgroundColor="#007F00"
+                        BackgroundColor="White"
                         />
                     <Label
                         Text="BERT 133 Scouting - 2022"
                         HorizontalOptions="Center"
                         TextColor="White" 
                         VerticalOptions="Center"
+                        />
+                    <Button
+                        x:Name="MatchButton"
+                        Clicked="MatchButton_Clicked"
+                        Text="Start"
+                        WidthRequest="100"
+                        HeightRequest="36"
+                        HorizontalOptions="End"
+                        FontSize="Small"
+                        BackgroundColor="White"
                         />
                 </Grid>
             </Frame>
@@ -57,6 +67,7 @@
                             Margin="0,0,0,0"
                         />
                         <Entry
+                            x:Name="TeamNumber"
                             WidthRequest="90"
                             HorizontalTextAlignment="End"
                             Keyboard="Numeric"
@@ -68,6 +79,7 @@
                             Margin="10,0,0,0"
                         />
                         <Entry
+                            x:Name="MatchNumber"
                             WidthRequest="70"
                             Keyboard="Numeric"
                             HorizontalTextAlignment="End"
@@ -79,6 +91,7 @@
                             Margin="10,0,0,0"
                         />
                         <Entry
+                            x:Name="ScouterName"
                             HorizontalOptions="FillAndExpand"
                             Margin="0,0,10,0"
                         />
@@ -86,6 +99,7 @@
                     <StackLayout
                         x:Name="MatchEntryBody"
                         Orientation="Vertical"
+                        IsVisible="False"
                         >
                         <Label
                             BackgroundColor="#007F00"
@@ -97,7 +111,9 @@
                         <!--add auto fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Moved off start:"></Label>
-                            <CheckBox></CheckBox>
+                            <CheckBox
+                                x:Name="MovedOffStartCheckbox"
+                                />
                         </StackLayout>
                         <Label
                             BackgroundColor="#007F00"
@@ -114,14 +130,37 @@
                             Margin="0,0,10,0"
                             HorizontalTextAlignment="Center"
                         />
-                        <!--add end game fields here-->
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Won"></Label>
-                            <CheckBox></CheckBox>
-                            <Label Text="Lost"></Label>
-                            <CheckBox></CheckBox>
-                            <Label Text="Tied"></Label>
-                            <CheckBox></CheckBox>
+                            <Label Text="Climbed" />
+                            <CheckBox 
+                                x:Name="ClimbedCheckbox"
+                                />
+                        </StackLayout>
+                        <!--add end game fields here-->
+                        <Label
+                            BackgroundColor="#007F00"
+                            TextColor="White"
+                            Text="Results"
+                            Margin="0,0,10,0"
+                            HorizontalTextAlignment="Center"
+                        />
+                        <!--add results fields here-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Won" />
+                            <CheckBox 
+                                x:Name="WonCheckbox"
+                                CheckedChanged="WonCheckbox_CheckedChanged"
+                                />
+                            <Label Text="Tied" />
+                            <CheckBox
+                                x:Name="TiedCheckbox"
+                                CheckedChanged="TiedCheckbox_CheckedChanged"
+                                />
+                            <Label Text="Lost" />
+                            <CheckBox
+                                x:Name="LostCheckbox"
+                                CheckedChanged="LostCheckbox_CheckedChanged"
+                                />
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
