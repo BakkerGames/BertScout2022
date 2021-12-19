@@ -1,61 +1,77 @@
+using BertScout2022.Data.Models;
 using SQLite;
 using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BertScout2022.Data
 {
     public class BertScout2022Database
     {
-        public const string dbFilename = "bertscout2022.db3";
-
         // update when db structure changes
         public const decimal dbVersion = 0.1M;
+
+        public const string dbFilename = "bertscout2022.db3";
 
         private static SQLiteAsyncConnection _database;
 
         public BertScout2022Database(string dbPath)
         {
-            try
-            {
-                _database = new SQLiteAsyncConnection(dbPath);
-                CreateTables();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+            _database = new SQLiteAsyncConnection(dbPath);
+            CreateTables();
         }
 
-        public string CreateTables()
+        public async void CreateTables()
         {
-            try
-            {
-                //_database.CreateTableAsync<FRCEvent>().Wait();
-                //_database.CreateTableAsync<Team>().Wait();
-                //_database.CreateTableAsync<EventTeam>().Wait();
-                //_database.CreateTableAsync<EventTeamMatch>().Wait();
-                return "OK";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            await _database.CreateTableAsync<TeamMatch>();
         }
 
-        public string DropTables()
+        public async void DropTables()
         {
-            try
+            await _database.DropTableAsync<TeamMatch>();
+        }
+
+        public async void ClearTables()
+        {
+            await _database.ExecuteAsync("TRUNCATE TABLE [TeamMatch];");
+        }
+
+        // TeamMatch
+
+        public async Task<List<TeamMatch>> GetTeamMatchesAsync()
+        {
+            return await _database.Table<TeamMatch>().ToListAsync();
+        }
+
+        public async Task<TeamMatch> GetTeamMatchAsync(int teamNumber, int matchNumber)
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append("SELECT [TeamMatch].* FROM [TeamMatch]");
+            query.Append(" WHERE [TeamMatch].[TeamNumber] = ");
+            query.Append(teamNumber);
+            query.Append(" AND [TeamMatch].[MatchNumber] = ");
+            query.Append(matchNumber);
+            List<TeamMatch> result = await _database.QueryAsync<TeamMatch>(query.ToString());
+            if (result == null || result.Count == 0)
             {
-                //_database.DropTableAsync<FRCEvent>().Wait();
-                //_database.DropTableAsync<Team>().Wait();
-                //_database.DropTableAsync<EventTeam>().Wait();
-                //_database.DropTableAsync<EventTeamMatch>().Wait();
-                return "OK";
+                return null;
             }
-            catch (Exception ex)
+            return result[0];
+        }
+
+        public async Task<int> SaveTeamMatchAsync(TeamMatch item)
+        {
+            if (item.Uuid == null)
             {
-                return ex.Message;
+                TeamMatch existingItem = await GetTeamMatchAsync(item.TeamNumber, item.MatchNumber);
+                if (existingItem != null)
+                {
+                    throw new Exception($"Item already exists - team={item.TeamNumber}, match={item.MatchNumber}");
+                }
+                item.Uuid = Guid.NewGuid().ToString();
             }
+            return await _database.InsertOrReplaceAsync(item);
         }
     }
 }

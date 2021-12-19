@@ -13,8 +13,8 @@ namespace BertScout2022
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
+            _ = Database; // open database
         }
 
         protected override void OnStart()
@@ -43,6 +43,5 @@ namespace BertScout2022
                 return database;
             }
         }
-
     }
 }

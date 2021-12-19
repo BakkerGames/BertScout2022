@@ -7,10 +7,9 @@ namespace BertScout2022.Env
     {
         public static string GetMyDocumentsPath()
         {
-            string baseDocumentsPath = "";
             string myDocumentsPath = "";
 
-            baseDocumentsPath = "/storage/sdcard0"; // android kindle
+            string baseDocumentsPath = "/storage/sdcard0";
             if (!Directory.Exists(baseDocumentsPath))
             {
                 baseDocumentsPath = "/storage/sdcard"; // android emulator
@@ -43,10 +42,9 @@ namespace BertScout2022.Env
 
         public static string GetMyPicturesPath()
         {
-            string basePicturesPath = "";
             string myPicturesPath = "";
 
-            basePicturesPath = "/storage/sdcard0"; // android kindle
+            string basePicturesPath = "/storage/sdcard0";
             if (!Directory.Exists(basePicturesPath))
             {
                 basePicturesPath = "/storage/sdcard"; // android emulator
