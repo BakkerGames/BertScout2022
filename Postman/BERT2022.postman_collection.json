@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "55feb9fd-e494-4e54-bc8f-676a4c069f85",
+		"name": "BERT2022",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TeamMatch List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{UrlBase}}/TeamMatch?sort%5B0%5D%5Bfield%5D=Id",
+					"host": [
+						"{{UrlBase}}"
+					],
+					"path": [
+						"TeamMatch"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "itrrAGdkIwoyewC7Y/recGfXE9o5VGRyEqS",
+							"disabled": true
+						},
+						{
+							"key": "sort%5B0%5D%5Bfield%5D",
+							"value": "Id"
+						},
+						{
+							"key": "sort%5B0%5D%5Bdirection%5D",
+							"value": "asc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{UrlBase}}/TeamMatch/{{TestRecId}}",
+					"host": [
+						"{{UrlBase}}"
+					],
+					"path": [
+						"TeamMatch",
+						"{{TestRecId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Bearer}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
