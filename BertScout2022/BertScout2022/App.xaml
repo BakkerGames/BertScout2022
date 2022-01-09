@@ -31,10 +31,5 @@
             <Setter Property="IsChecked" Value="False" />
             <Setter Property="Color" Value="Black" />
         </Style>
-        <Style TargetType="RadioButton">
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="IsChecked" Value="False" />
-        </Style>
     </Application.Resources>
 </Application>

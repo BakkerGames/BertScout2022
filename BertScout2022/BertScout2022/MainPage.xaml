@@ -131,9 +131,38 @@
                             HorizontalTextAlignment="Center"
                         />
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Climbed" />
+                            <Label
+                                Text="Climbed:" 
+                                />
+                            <Label Text="None"/>
                             <CheckBox 
-                                x:Name="ClimbedCheckbox"
+                                x:Name="Climbed0"
+                                IsChecked="True"
+                                CheckedChanged="Climbed0_CheckedChanged"
+                                />
+                            <Label Text="Low"/>
+                            <CheckBox 
+                                x:Name="Climbed1"
+                                IsChecked="False"
+                                CheckedChanged="Climbed1_CheckedChanged"
+                                />
+                            <Label Text="Mid"/>
+                            <CheckBox 
+                                x:Name="Climbed2"
+                                IsChecked="False"
+                                CheckedChanged="Climbed2_CheckedChanged"
+                                />
+                            <Label Text="High"/>
+                            <CheckBox 
+                                x:Name="Climbed3"
+                                IsChecked="False"
+                                CheckedChanged="Climbed3_CheckedChanged"
+                                />
+                            <Label Text="Traversal"/>
+                            <CheckBox 
+                                x:Name="Climbed4"
+                                IsChecked="False"
+                                CheckedChanged="Climbed4_CheckedChanged"
                                 />
                         </StackLayout>
                         <!--add end game fields here-->

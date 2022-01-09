@@ -20,13 +20,15 @@ namespace BertScout2022.Data.Models
         public bool MovedOffStart { get; set; }
         public int AutoHighGoals { get; set; }
         public int AutoLowGoals { get; set; }
+        public int HumanHighGoals { get; set; }
+        public int HumanLowGoals { get; set; }
 
         // teleop
         public int TeleHighGoals { get; set; }
         public int TeleLowGoals { get; set; }
 
         // end game
-        public bool Climbed { get; set; }
+        public int ClimbLevel { get; set; }
 
         // overall
         public bool Won { get; set; }

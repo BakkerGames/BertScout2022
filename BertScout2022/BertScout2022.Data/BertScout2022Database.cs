@@ -10,7 +10,7 @@ namespace BertScout2022.Data
     public class BertScout2022Database
     {
         // update when db structure changes
-        public const decimal dbVersion = 0.1M;
+        public const decimal dbVersion = 0.2M;
 
         public const string dbFilename = "bertscout2022.db3";
 
@@ -78,7 +78,7 @@ namespace BertScout2022.Data
         {
             if (item.Uuid == null)
             {
-                return 0; 
+                return 0;
             }
             return await _database.DeleteAsync(item);
         }

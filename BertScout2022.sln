@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BertScout2022", "BertScout2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BertScout2022.Data", "BertScout2022\BertScout2022.Data\BertScout2022.Data.csproj", "{32595006-45B8-4324-9CC9-9D18366F08EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BertScout2022.Env", "BertScout2022\BertScout2022.Env\BertScout2022.Env.csproj", "{3DE6E023-FE81-4205-8563-A8BA8C968967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BertScout2022.Env", "BertScout2022\BertScout2022.Env\BertScout2022.Env.csproj", "{3DE6E023-FE81-4205-8563-A8BA8C968967}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{83188CE2-DD3D-4F7D-8EDA-084324556CB4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

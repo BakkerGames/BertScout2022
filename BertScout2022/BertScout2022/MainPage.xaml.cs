@@ -83,7 +83,11 @@ namespace BertScout2022
         private void ClearAllFields()
         {
             MovedOffStartCheckbox.IsChecked = false;
-            ClimbedCheckbox.IsChecked = false;
+            Climbed0.IsChecked = true;
+            Climbed1.IsChecked = false;
+            Climbed2.IsChecked = false;
+            Climbed3.IsChecked = false;
+            Climbed4.IsChecked = false;
             WonCheckbox.IsChecked = false;
             LostCheckbox.IsChecked = false;
             TiedCheckbox.IsChecked = false;
@@ -93,10 +97,19 @@ namespace BertScout2022
         {
             ScouterName.Text = item.ScouterName;
             MovedOffStartCheckbox.IsChecked = item.MovedOffStart;
-            ClimbedCheckbox.IsChecked = item.Climbed;
             WonCheckbox.IsChecked = item.Won;
             TiedCheckbox.IsChecked = item.Tied;
             LostCheckbox.IsChecked = item.Lost;
+            FillClimbedCheckBoxes(item.ClimbLevel);
+        }
+
+        private void FillClimbedCheckBoxes(int climbLevel)
+        {
+            Climbed0.IsChecked = climbLevel == 0;
+            Climbed1.IsChecked = climbLevel == 1;
+            Climbed2.IsChecked = climbLevel == 2;
+            Climbed3.IsChecked = climbLevel == 3;
+            Climbed4.IsChecked = climbLevel == 4;
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -106,7 +119,11 @@ namespace BertScout2022
                 item.ScouterName = ScouterName.Text;
             }
             item.MovedOffStart = MovedOffStartCheckbox.IsChecked;
-            item.Climbed = ClimbedCheckbox.IsChecked;
+            if (Climbed0.IsChecked) item.ClimbLevel = 0;
+            if (Climbed1.IsChecked) item.ClimbLevel = 1;
+            if (Climbed2.IsChecked) item.ClimbLevel = 2;
+            if (Climbed3.IsChecked) item.ClimbLevel = 3;
+            if (Climbed4.IsChecked) item.ClimbLevel = 4;
             item.Won = WonCheckbox.IsChecked;
             item.Tied = TiedCheckbox.IsChecked;
             item.Lost = LostCheckbox.IsChecked;
@@ -146,6 +163,48 @@ namespace BertScout2022
                     break;
             }
             _state = stateNumber;
+        }
+
+        bool _climbedChanging = false;
+
+        private void Climbed0_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (_climbedChanging) return;
+            _climbedChanging = true;
+            FillClimbedCheckBoxes(0);
+            _climbedChanging = false;
+        }
+
+        private void Climbed1_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (_climbedChanging) return;
+            _climbedChanging = true;
+            FillClimbedCheckBoxes(1);
+            _climbedChanging = false;
+        }
+
+        private void Climbed2_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (_climbedChanging) return;
+            _climbedChanging = true;
+            FillClimbedCheckBoxes(2);
+            _climbedChanging = false;
+        }
+
+        private void Climbed3_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (_climbedChanging) return;
+            _climbedChanging = true;
+            FillClimbedCheckBoxes(3);
+            _climbedChanging = false;
+        }
+
+        private void Climbed4_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (_climbedChanging) return;
+            _climbedChanging = true;
+            FillClimbedCheckBoxes(4);
+            _climbedChanging = false;
         }
 
         private void WonCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
