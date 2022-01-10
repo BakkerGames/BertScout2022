@@ -83,7 +83,6 @@ namespace BertScout2022
         private void ClearAllFields()
         {
             MovedOffStartCheckbox.IsChecked = false;
-            Climbed0.IsChecked = true;
             Climbed1.IsChecked = false;
             Climbed2.IsChecked = false;
             Climbed3.IsChecked = false;
@@ -105,11 +104,10 @@ namespace BertScout2022
 
         private void FillClimbedCheckBoxes(int climbLevel)
         {
-            Climbed0.IsChecked = climbLevel == 0;
-            Climbed1.IsChecked = climbLevel == 1;
-            Climbed2.IsChecked = climbLevel == 2;
-            Climbed3.IsChecked = climbLevel == 3;
-            Climbed4.IsChecked = climbLevel == 4;
+            Climbed1.IsChecked = (climbLevel == 1);
+            Climbed2.IsChecked = (climbLevel == 2);
+            Climbed3.IsChecked = (climbLevel == 3);
+            Climbed4.IsChecked = (climbLevel == 4);
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -119,7 +117,7 @@ namespace BertScout2022
                 item.ScouterName = ScouterName.Text;
             }
             item.MovedOffStart = MovedOffStartCheckbox.IsChecked;
-            if (Climbed0.IsChecked) item.ClimbLevel = 0;
+            item.ClimbLevel = 0;
             if (Climbed1.IsChecked) item.ClimbLevel = 1;
             if (Climbed2.IsChecked) item.ClimbLevel = 2;
             if (Climbed3.IsChecked) item.ClimbLevel = 3;
@@ -165,21 +163,14 @@ namespace BertScout2022
             _state = stateNumber;
         }
 
-        bool _climbedChanging = false;
-
-        private void Climbed0_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            FillClimbedCheckBoxes(0);
-            _climbedChanging = false;
-        }
+        private bool _climbedChanging = false;
 
         private void Climbed1_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (_climbedChanging) return;
             _climbedChanging = true;
-            FillClimbedCheckBoxes(1);
+            if (Climbed1.IsChecked)
+                FillClimbedCheckBoxes(1);
             _climbedChanging = false;
         }
 
@@ -187,7 +178,8 @@ namespace BertScout2022
         {
             if (_climbedChanging) return;
             _climbedChanging = true;
-            FillClimbedCheckBoxes(2);
+            if (Climbed2.IsChecked)
+                FillClimbedCheckBoxes(2);
             _climbedChanging = false;
         }
 
@@ -195,7 +187,8 @@ namespace BertScout2022
         {
             if (_climbedChanging) return;
             _climbedChanging = true;
-            FillClimbedCheckBoxes(3);
+            if (Climbed3.IsChecked)
+                FillClimbedCheckBoxes(3);
             _climbedChanging = false;
         }
 
@@ -203,7 +196,8 @@ namespace BertScout2022
         {
             if (_climbedChanging) return;
             _climbedChanging = true;
-            FillClimbedCheckBoxes(4);
+            if (Climbed4.IsChecked)
+                FillClimbedCheckBoxes(4);
             _climbedChanging = false;
         }
 

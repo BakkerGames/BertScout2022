@@ -134,12 +134,6 @@
                             <Label
                                 Text="Climbed:" 
                                 />
-                            <Label Text="None"/>
-                            <CheckBox 
-                                x:Name="Climbed0"
-                                IsChecked="True"
-                                CheckedChanged="Climbed0_CheckedChanged"
-                                />
                             <Label Text="Low"/>
                             <CheckBox 
                                 x:Name="Climbed1"
