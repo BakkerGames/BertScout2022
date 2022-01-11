@@ -169,20 +169,21 @@
                         />
                         <!--add results fields here-->
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Won" />
-                            <CheckBox 
+                            <Label Text="Match Result:"/>
+                            <Button 
                                 x:Name="WonCheckbox"
-                                CheckedChanged="WonCheckbox_CheckedChanged"
+                                WidthRequest="100"
+                                Text="Won"
                                 />
-                            <Label Text="Tied" />
-                            <CheckBox
+                            <Button
                                 x:Name="TiedCheckbox"
-                                CheckedChanged="TiedCheckbox_CheckedChanged"
+                                WidthRequest="100"
+                                Text="Tied"
                                 />
-                            <Label Text="Lost" />
-                            <CheckBox
+                            <Button
                                 x:Name="LostCheckbox"
-                                CheckedChanged="LostCheckbox_CheckedChanged"
+                                WidthRequest="100"
+                                Text="Lost"
                                 />
                         </StackLayout>
                     </StackLayout>

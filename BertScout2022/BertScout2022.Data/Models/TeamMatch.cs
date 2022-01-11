@@ -31,11 +31,10 @@ namespace BertScout2022.Data.Models
         public int ClimbLevel { get; set; }
 
         // overall
-        public bool Won { get; set; }
-        public bool Tied { get; set; }
-        public bool Lost { get; set; }
-        public bool SpecialRP1 { get; set; }
-        public bool SpecialRP2 { get; set; }
+        public int MatchRP { get; set; } // 0=Lost, 1=Tie, 2=Win
+        public int CargoRP { get; set; }
+        public int ClimbRP { get; set; }
+        public int ScouterRating { get; set; }
         public string Comments { get; set; }
     }
 }

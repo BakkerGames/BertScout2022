@@ -87,18 +87,18 @@ namespace BertScout2022
             Climbed2.IsChecked = false;
             Climbed3.IsChecked = false;
             Climbed4.IsChecked = false;
-            WonCheckbox.IsChecked = false;
-            LostCheckbox.IsChecked = false;
-            TiedCheckbox.IsChecked = false;
+            //WonCheckbox.IsChecked = false;
+            //LostCheckbox.IsChecked = false;
+            //TiedCheckbox.IsChecked = false;
         }
 
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
             MovedOffStartCheckbox.IsChecked = item.MovedOffStart;
-            WonCheckbox.IsChecked = item.Won;
-            TiedCheckbox.IsChecked = item.Tied;
-            LostCheckbox.IsChecked = item.Lost;
+            //WonCheckbox.IsChecked = item.MatchRP == 2;
+            //TiedCheckbox.IsChecked = item.MatchRP == 1;
+            //LostCheckbox.IsChecked = item.MatchRP == 0;
             FillClimbedCheckBoxes(item.ClimbLevel);
         }
 
@@ -122,9 +122,9 @@ namespace BertScout2022
             if (Climbed2.IsChecked) item.ClimbLevel = 2;
             if (Climbed3.IsChecked) item.ClimbLevel = 3;
             if (Climbed4.IsChecked) item.ClimbLevel = 4;
-            item.Won = WonCheckbox.IsChecked;
-            item.Tied = TiedCheckbox.IsChecked;
-            item.Lost = LostCheckbox.IsChecked;
+            item.MatchRP = 0;
+            //if (TiedCheckbox.IsChecked) item.MatchRP = 1;
+            //if (WonCheckbox.IsChecked) item.MatchRP = 2;
         }
 
         private void SetState(int stateNumber)
@@ -203,29 +203,29 @@ namespace BertScout2022
 
         private void WonCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (WonCheckbox.IsChecked)
-            {
-                TiedCheckbox.IsChecked = false;
-                LostCheckbox.IsChecked = false;
-            }
+            //if (WonCheckbox.IsChecked)
+            //{
+            //    TiedCheckbox.IsChecked = false;
+            //    LostCheckbox.IsChecked = false;
+            //}
         }
 
         private void TiedCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (TiedCheckbox.IsChecked)
-            {
-                WonCheckbox.IsChecked = false;
-                LostCheckbox.IsChecked = false;
-            }
+            //if (TiedCheckbox.IsChecked)
+            //{
+            //    WonCheckbox.IsChecked = false;
+            //    LostCheckbox.IsChecked = false;
+            //}
         }
 
         private void LostCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (LostCheckbox.IsChecked)
-            {
-                WonCheckbox.IsChecked = false;
-                TiedCheckbox.IsChecked = false;
-            }
+            //if (LostCheckbox.IsChecked)
+            //{
+            //    WonCheckbox.IsChecked = false;
+            //    TiedCheckbox.IsChecked = false;
+            //}
         }
     }
 }
