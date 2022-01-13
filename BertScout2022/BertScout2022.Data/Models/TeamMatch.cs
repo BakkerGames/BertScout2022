@@ -10,6 +10,8 @@ namespace BertScout2022.Data.Models
         [PrimaryKey, AutoIncrement]
         public int? Id { get; set; }
         public string Uuid { get; set; }
+        public string AirtableId { get; set; }
+
         [Indexed]
         public int TeamNumber { get; set; }
         [Indexed]

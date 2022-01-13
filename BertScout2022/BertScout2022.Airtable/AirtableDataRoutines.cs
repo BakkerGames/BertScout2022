@@ -17,25 +17,11 @@ namespace BertScout2022.AirTable
             int NewCount = 0;
             //int UpdatedCount = 0;
             List<Fields> newRecordList = new List<Fields>();
+            List<IdFields> updatedRecordList = new List<IdFields>();
             using (AirtableBase airtableBase = new AirtableBase(AIRTABLE_KEY, AIRTABLE_BASE))
             {
                 foreach (TeamMatch match in matches)
                 {
-
-                    //List<Fields> newRecordList = new List<Fields>();
-                    //List<IdFields> updatedRecordList = new List<IdFields>();
-                    //foreach (TeamMatch match in App.Database.GetTeamMatchesAsync().Result)
-                    //{
-                    //    // only send matches from this event
-                    //    if (match.EventKey != App.currFRCEventKey)
-                    //    {
-                    //        continue;
-                    //    }
-                    //    // only send matches from this device
-                    //    if (match.DeviceName != App.KindleName)
-                    //    {
-                    //        continue;
-                    //    }
                     RecordCount++;
                     if (string.IsNullOrEmpty(match.AirtableId))
                     {
@@ -105,7 +91,7 @@ namespace BertScout2022.AirTable
                     sendList.Add(newRecordList[0]);
                     newRecordList.RemoveAt(0);
                 } while (newRecordList.Count > 0 && sendList.Count < 10);
-                result = await airtableBase.CreateMultipleRecords("Match", sendList.ToArray());
+                result = await airtableBase.CreateMultipleRecords("TeamMatch", sendList.ToArray());
                 if (!result.Success)
                 {
                     //Label_Results.Text = "Error uploading:\r\n";
@@ -126,7 +112,7 @@ namespace BertScout2022.AirTable
                 }
                 if (newRecordList.Count > 0)
                 {
-                    // can only send 5 batches per second, make sure that doesn't happen
+                    // can only send 5 batches per second - make sure that doesn't happen
                     System.Threading.Thread.Sleep(500);
                 }
             }
