@@ -171,19 +171,70 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Match Result:"/>
                             <Button 
-                                x:Name="WonCheckbox"
+                                x:Name="WonButton"
                                 WidthRequest="100"
                                 Text="Won"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Won_Button_Clicked"
                                 />
                             <Button
-                                x:Name="TiedCheckbox"
+                                x:Name="TiedButton"
                                 WidthRequest="100"
                                 Text="Tied"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Tied_Button_Clicked"
                                 />
                             <Button
-                                x:Name="LostCheckbox"
+                                x:Name="LostButton"
                                 WidthRequest="100"
                                 Text="Lost"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Lost_Button_Clicked"
+                                />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Scouter Rating:"/>
+                            <Button 
+                                x:Name="Rate0Button"
+                                WidthRequest="50"
+                                Text="0"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate0Box_Clicked"
+                                />
+                            <Button 
+                                x:Name="Rate1Button"
+                                WidthRequest="50"
+                                Text="1"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate1Box_Clicked"
+                                />
+                            <Button 
+                                x:Name="Rate2Button"
+                                WidthRequest="50"
+                                Text="2"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate2Box_Clicked"
+                                />
+                            <Button 
+                                x:Name="Rate3Button"
+                                WidthRequest="50"
+                                Text="3"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate3Box_Clicked"
+                                />
+                            <Button 
+                                x:Name="Rate4Button"
+                                WidthRequest="50"
+                                Text="4"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate4Box_Clicked"
+                                />
+                            <Button 
+                                x:Name="Rate5Button"
+                                WidthRequest="50"
+                                Text="5"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Button_Rate5Box_Clicked"
                                 />
                         </StackLayout>
                     </StackLayout>
