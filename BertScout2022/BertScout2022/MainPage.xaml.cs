@@ -7,9 +7,9 @@ namespace BertScout2022
     public partial class MainPage : ContentPage
     {
         private TeamMatch teamMatch;
-
         private int _state;
-
+        static public Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
+        static public Color SelectedButtonColor = Color.FromHex("#008000");
         public MainPage()
         {
             InitializeComponent();
@@ -87,19 +87,17 @@ namespace BertScout2022
             Climbed2.IsChecked = false;
             Climbed3.IsChecked = false;
             Climbed4.IsChecked = false;
-            //WonCheckbox.IsChecked = false;
-            //LostCheckbox.IsChecked = false;
-            //TiedCheckbox.IsChecked = false;
+            Win_Tie_Lost_Button_Background(-1);
+            Rating_Button_Background(-1);
         }
 
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
             MovedOffStartCheckbox.IsChecked = item.MovedOffStart;
-            //WonCheckbox.IsChecked = item.MatchRP == 2;
-            //TiedCheckbox.IsChecked = item.MatchRP == 1;
-            //LostCheckbox.IsChecked = item.MatchRP == 0;
             FillClimbedCheckBoxes(item.ClimbLevel);
+            Win_Tie_Lost_Button_Background(item.MatchRP);
+            Rating_Button_Background(item.ScouterRating);
         }
 
         private void FillClimbedCheckBoxes(int climbLevel)
@@ -122,9 +120,6 @@ namespace BertScout2022
             if (Climbed2.IsChecked) item.ClimbLevel = 2;
             if (Climbed3.IsChecked) item.ClimbLevel = 3;
             if (Climbed4.IsChecked) item.ClimbLevel = 4;
-            item.MatchRP = 0;
-            //if (TiedCheckbox.IsChecked) item.MatchRP = 1;
-            //if (WonCheckbox.IsChecked) item.MatchRP = 2;
         }
 
         private void SetState(int stateNumber)
@@ -200,32 +195,67 @@ namespace BertScout2022
                 FillClimbedCheckBoxes(4);
             _climbedChanging = false;
         }
-
-        private void WonCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Won_Button_Clicked(object sender, EventArgs e)
         {
-            //if (WonCheckbox.IsChecked)
-            //{
-            //    TiedCheckbox.IsChecked = false;
-            //    LostCheckbox.IsChecked = false;
-            //}
+            teamMatch.MatchRP = 2;
+            Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
         }
 
-        private void TiedCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Tied_Button_Clicked (object sender, EventArgs e)
         {
-            //if (TiedCheckbox.IsChecked)
-            //{
-            //    WonCheckbox.IsChecked = false;
-            //    LostCheckbox.IsChecked = false;
-            //}
+            teamMatch.MatchRP = 1;
+            Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
         }
 
-        private void LostCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Lost_Button_Clicked(object sender, EventArgs e)
         {
-            //if (LostCheckbox.IsChecked)
-            //{
-            //    WonCheckbox.IsChecked = false;
-            //    TiedCheckbox.IsChecked = false;
-            //}
+            teamMatch.MatchRP = 0;
+            Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
+        }
+        private void Win_Tie_Lost_Button_Background(int value)
+        {
+            WonButton.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
+            TiedButton.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
+            LostButton.Background = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+        private void Button_Rate0Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 0;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Button_Rate1Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 1;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Button_Rate2Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 2;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Button_Rate3Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 3;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Button_Rate4Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 4;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Button_Rate5Box_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ScouterRating = 5;
+            Rating_Button_Background(teamMatch.ScouterRating);
+        }
+        private void Rating_Button_Background(int value)
+        {
+            Rate0Button.BackgroundColor = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
+            Rate1Button.BackgroundColor = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
+            Rate2Button.BackgroundColor = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
+            Rate3Button.BackgroundColor = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
+            Rate4Button.BackgroundColor = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
+            Rate5Button.BackgroundColor = (value == 5) ? SelectedButtonColor : UnselectedButtonColor;
         }
     }
 }
