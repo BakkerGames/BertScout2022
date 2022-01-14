@@ -82,11 +82,8 @@ namespace BertScout2022
 
         private void ClearAllFields()
         {
-            MovedOffStartCheckbox.IsChecked = false;
-            Climbed1.IsChecked = false;
-            Climbed2.IsChecked = false;
-            Climbed3.IsChecked = false;
-            Climbed4.IsChecked = false;
+            Moved_Off_Start(false);
+            Climbed_Button_Background(-1);
             Win_Tie_Lost_Button_Background(-1);
             Rating_Button_Background(-1);
         }
@@ -94,18 +91,10 @@ namespace BertScout2022
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
-            MovedOffStartCheckbox.IsChecked = item.MovedOffStart;
-            FillClimbedCheckBoxes(item.ClimbLevel);
+            Moved_Off_Start(item.MovedOffStart);
+            Climbed_Button_Background(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
-        }
-
-        private void FillClimbedCheckBoxes(int climbLevel)
-        {
-            Climbed1.IsChecked = (climbLevel == 1);
-            Climbed2.IsChecked = (climbLevel == 2);
-            Climbed3.IsChecked = (climbLevel == 3);
-            Climbed4.IsChecked = (climbLevel == 4);
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -114,12 +103,6 @@ namespace BertScout2022
             {
                 item.ScouterName = ScouterName.Text;
             }
-            item.MovedOffStart = MovedOffStartCheckbox.IsChecked;
-            item.ClimbLevel = 0;
-            if (Climbed1.IsChecked) item.ClimbLevel = 1;
-            if (Climbed2.IsChecked) item.ClimbLevel = 2;
-            if (Climbed3.IsChecked) item.ClimbLevel = 3;
-            if (Climbed4.IsChecked) item.ClimbLevel = 4;
         }
 
         private void SetState(int stateNumber)
@@ -157,43 +140,50 @@ namespace BertScout2022
             }
             _state = stateNumber;
         }
-
-        private bool _climbedChanging = false;
-
-        private void Climbed1_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Moved_Off_Start_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed1.IsChecked)
-                FillClimbedCheckBoxes(1);
-            _climbedChanging = false;
+            teamMatch.MovedOffStart = !(teamMatch.MovedOffStart);
+            Moved_Off_Start(teamMatch.MovedOffStart);
+        }
+        private void Moved_Off_Start(bool value)
+        {
+            Moved_Off_Start_Button.Background = (value) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+        private void Climbed_None_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ClimbLevel = 0;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
+        }
+        private void Climbed1_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ClimbLevel = 1;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed2_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed2_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed2.IsChecked)
-                FillClimbedCheckBoxes(2);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 2;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed3_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed3_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed3.IsChecked)
-                FillClimbedCheckBoxes(3);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 3;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed4_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed4_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed4.IsChecked)
-                FillClimbedCheckBoxes(4);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 4;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
+        }
+        private void Climbed_Button_Background(int value)
+        {
+            Climbed0.Background = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed1.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed2.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed3.Background = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed4.Background = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private void Won_Button_Clicked(object sender, EventArgs e)
         {
@@ -201,7 +191,7 @@ namespace BertScout2022
             Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
         }
 
-        private void Tied_Button_Clicked (object sender, EventArgs e)
+        private void Tied_Button_Clicked(object sender, EventArgs e)
         {
             teamMatch.MatchRP = 1;
             Win_Tie_Lost_Button_Background(teamMatch.MatchRP);

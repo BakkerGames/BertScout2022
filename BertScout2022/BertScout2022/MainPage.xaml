@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BertScout2022.MainPage"
              Title="BERT 133 Scouting - 2022">
-    
+
     <ContentPage.Resources>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout
             Orientation="Vertical"
@@ -110,9 +110,12 @@
                         />
                         <!--add auto fields here-->
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Moved off start:"></Label>
-                            <CheckBox
-                                x:Name="MovedOffStartCheckbox"
+                            <Button
+                                x:Name="Moved_Off_Start_Button"
+                                WidthRequest="200"
+                                Text="Moved Off Start"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Moved_Off_Start_Clicked"
                                 />
                         </StackLayout>
                         <Label
@@ -134,29 +137,40 @@
                             <Label
                                 Text="Climbed:" 
                                 />
-                            <Label Text="Low"/>
-                            <CheckBox 
+                            <Button
+                                x:Name="Climbed0"
+                                WidthRequest="75"
+                                Text="None"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed_None_Clicked"
+                                />
+                            <Button
                                 x:Name="Climbed1"
-                                IsChecked="False"
-                                CheckedChanged="Climbed1_CheckedChanged"
+                                WidthRequest="75"
+                                Text="Low"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed1_Clicked"
                                 />
-                            <Label Text="Mid"/>
-                            <CheckBox 
+                            <Button 
                                 x:Name="Climbed2"
-                                IsChecked="False"
-                                CheckedChanged="Climbed2_CheckedChanged"
+                                WidthRequest="75"
+                                Text="Mid"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed2_Clicked"
                                 />
-                            <Label Text="High"/>
-                            <CheckBox 
+                            <Button
                                 x:Name="Climbed3"
-                                IsChecked="False"
-                                CheckedChanged="Climbed3_CheckedChanged"
+                                WidthRequest="75"
+                                Text="High"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed3_Clicked"
                                 />
-                            <Label Text="Traversal"/>
-                            <CheckBox 
+                            <Button
                                 x:Name="Climbed4"
-                                IsChecked="False"
-                                CheckedChanged="Climbed4_CheckedChanged"
+                                WidthRequest="126"
+                                Text="Traversal"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed4_Clicked"
                                 />
                         </StackLayout>
                         <!--add end game fields here-->
