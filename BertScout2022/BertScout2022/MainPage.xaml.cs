@@ -123,6 +123,7 @@ namespace BertScout2022
             if (Climbed2.IsChecked) item.ClimbLevel = 2;
             if (Climbed3.IsChecked) item.ClimbLevel = 3;
             if (Climbed4.IsChecked) item.ClimbLevel = 4;
+            item.Changed = true;
         }
 
         private void SetState(int stateNumber)
@@ -269,7 +270,8 @@ namespace BertScout2022
             await AirtableDB.AirtableSendRecords(matches);
             foreach (TeamMatch match in matches)
             {
-                _ = await App.Database.SaveTeamMatchAsync(match);
+                match.Changed = false;
+                await App.Database.SaveTeamMatchAsync(match);
             }
         }
     }

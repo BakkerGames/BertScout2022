@@ -10,7 +10,7 @@ namespace BertScout2022.Data
     public class BertScout2022Database
     {
         // update when db structure changes
-        public const decimal dbVersion = 0.3M;
+        public const decimal dbVersion = 0.4M;
 
         public const string dbFilename = "bertscout2022.db3";
 

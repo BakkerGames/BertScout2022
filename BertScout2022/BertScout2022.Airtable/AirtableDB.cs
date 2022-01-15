@@ -1,6 +1,8 @@
 using AirtableApiClient;
 using BertScout2022.Data.Models;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BertScout2022.Airtable
@@ -12,36 +14,52 @@ namespace BertScout2022.Airtable
 
         public static async Task AirtableSendRecords(List<TeamMatch> matches)
         {
-            int RecordCount = 0;
             int NewCount = 0;
-            //int UpdatedCount = 0;
+            int UpdatedCount = 0;
             List<Fields> newRecordList = new List<Fields>();
+            List<IdFields> updatedRecordList = new List<IdFields>();
+            FieldInfo[] myFieldInfo;
+            Type myType = typeof(TeamMatch);
+            myFieldInfo = myType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
             using (AirtableBase airtableBase = new AirtableBase(AIRTABLE_KEY, AIRTABLE_BASE))
             {
                 foreach (TeamMatch match in matches)
                 {
-                    RecordCount++;
                     if (string.IsNullOrEmpty(match.AirtableId))
                     {
                         Fields fields = new Fields();
-                        fields.AddField("Uuid", match.Uuid.ToString());
-                        fields.AddField("TeamNumber", match.TeamNumber);
-                        fields.AddField("MatchNumber", match.MatchNumber);
-                        fields.AddField("ScouterName", match.ScouterName);
-                        fields.AddField("LeftTarmac", match.LeftTarmac);
-                        fields.AddField("AutoHighGoals", match.AutoHighGoals);
-                        fields.AddField("AutoLowGoals", match.AutoLowGoals);
-                        fields.AddField("HumanHighGoals", match.HumanHighGoals);
-                        fields.AddField("HumanLowGoals", match.HumanLowGoals);
-                        fields.AddField("TeleHighGoals", match.TeleHighGoals);
-                        fields.AddField("TeleLowGoals", match.TeleLowGoals);
-                        fields.AddField("ClimbLevel", match.ClimbLevel);
-                        fields.AddField("MatchRP", match.MatchRP);
-                        fields.AddField("CargoRP", match.CargoRP);
-                        fields.AddField("ClimbRP", match.ClimbRP);
-                        fields.AddField("ScouterRating", match.ScouterRating);
-                        fields.AddField("Comments", match.Comments);
+                        foreach (FieldInfo fi in myFieldInfo)
+                        {
+                            // name is "<name>stuff", so just get the name part
+                            int pos1 = fi.Name.IndexOf('<') + 1;
+                            int pos2 = fi.Name.IndexOf('>');
+                            string name = fi.Name.Substring(pos1, pos2 - pos1);
+                            // these fields are not in airtable
+                            if (name.ToLower() == "id") continue;
+                            if (name.ToLower() == "airtableid") continue;
+                            if (name.ToLower() == "changed") continue;
+                            fields.AddField(name, fi.GetValue(match));
+                        }
                         newRecordList.Add(fields);
+                        NewCount++;
+                    }
+                    else if (match.Changed)
+                    {
+                        IdFields idFields = new IdFields(match.AirtableId);
+                        foreach (FieldInfo fi in myFieldInfo)
+                        {
+                            // name is "<name>stuff", so just get the name part
+                            int pos1 = fi.Name.IndexOf('<') + 1;
+                            int pos2 = fi.Name.IndexOf('>');
+                            string name = fi.Name.Substring(pos1, pos2 - pos1);
+                            // these fields are not in airtable
+                            if (name.ToLower() == "id") continue;
+                            if (name.ToLower() == "airtableid") continue;
+                            if (name.ToLower() == "changed") continue;
+                            idFields.AddField(name, fi.GetValue(match));
+                        }
+                        updatedRecordList.Add(idFields);
+                        UpdatedCount++;
                     }
                 }
                 if (newRecordList.Count > 0)
@@ -52,6 +70,15 @@ namespace BertScout2022.Airtable
                         return; // error, exit out
                     }
                     NewCount += tempCount;
+                }
+                if (updatedRecordList.Count > 0)
+                {
+                    int tempCount = await AirtableSendUpdatedRecords(airtableBase, updatedRecordList);
+                    if (tempCount < 0)
+                    {
+                        return; // error, exit out
+                    }
+                    UpdatedCount += tempCount;
                 }
             }
         }
@@ -91,6 +118,38 @@ namespace BertScout2022.Airtable
                 if (newRecordList.Count > 0)
                 {
                     // can only send 5 batches per second - make sure that doesn't happen
+                    System.Threading.Thread.Sleep(500);
+                }
+            }
+            return finalCount;
+        }
+
+        private static async Task<int> AirtableSendUpdatedRecords(AirtableBase airtableBase,
+                                                                  List<IdFields> updatedRecordList)
+        {
+            AirtableCreateUpdateReplaceMultipleRecordsResponse result;
+            List<IdFields> sendList = new List<IdFields>();
+            int finalCount = 0;
+            while (updatedRecordList.Count > 0)
+            {
+                sendList.Clear();
+                do
+                {
+                    sendList.Add(updatedRecordList[0]);
+                    updatedRecordList.RemoveAt(0);
+                } while (updatedRecordList.Count > 0 && sendList.Count < 10);
+                result = await airtableBase.UpdateMultipleRecords("TeamMatch", sendList.ToArray());
+                if (!result.Success)
+                {
+                    return -1;
+                }
+                foreach (AirtableRecord rec in result.Records)
+                {
+                    finalCount++;
+                }
+                if (updatedRecordList.Count > 0)
+                {
+                    // can only send 5 batches per second, make sure that doesn't happen
                     System.Threading.Thread.Sleep(500);
                 }
             }
