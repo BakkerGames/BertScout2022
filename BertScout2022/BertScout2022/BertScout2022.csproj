@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BertScout2022.Airtable\BertScout2022.Airtable.csproj" />
     <ProjectReference Include="..\BertScout2022.Data\BertScout2022.Data.csproj" />
     <ProjectReference Include="..\BertScout2022.Env\BertScout2022.Env.csproj" />
   </ItemGroup>

@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BertScout2022.MainPage"
              Title="BERT 133 Scouting - 2022">
-    
+
     <ContentPage.Resources>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout
             Orientation="Vertical"
@@ -239,6 +239,25 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
+            </ScrollView>
+            <ScrollView
+                x:Name="MatchMenuView"
+                IsVisible="False"
+                IsEnabled="False"
+                BackgroundColor="White"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Margin="0"
+                Padding="10,0,0,10">
+                <Button
+                    x:Name="SendToAirtable"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    TextColor="Black"
+                    BackgroundColor="#bfbfbf"
+                    Text="Send to Airtable"
+                    Clicked="Button_SendToAirtable"
+                />
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>

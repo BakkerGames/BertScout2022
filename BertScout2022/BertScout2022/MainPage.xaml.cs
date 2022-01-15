@@ -1,5 +1,7 @@
 ﻿using BertScout2022.Data.Models;
+using BertScout2022.Airtable;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace BertScout2022
@@ -8,8 +10,9 @@ namespace BertScout2022
     {
         private TeamMatch teamMatch;
         private int _state;
-        static public Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
-        static public Color SelectedButtonColor = Color.FromHex("#008000");
+        public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
+        public static Color SelectedButtonColor = Color.FromHex("#008000");
+
         public MainPage()
         {
             InitializeComponent();
@@ -94,7 +97,7 @@ namespace BertScout2022
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
-            MovedOffStartCheckbox.IsChecked = item.MovedOffStart;
+            MovedOffStartCheckbox.IsChecked = item.LeftTarmac == 1;
             FillClimbedCheckBoxes(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
@@ -114,7 +117,7 @@ namespace BertScout2022
             {
                 item.ScouterName = ScouterName.Text;
             }
-            item.MovedOffStart = MovedOffStartCheckbox.IsChecked;
+            item.LeftTarmac = MovedOffStartCheckbox.IsChecked ? 1 : 0;
             item.ClimbLevel = 0;
             if (Climbed1.IsChecked) item.ClimbLevel = 1;
             if (Climbed2.IsChecked) item.ClimbLevel = 2;
@@ -143,6 +146,8 @@ namespace BertScout2022
                     MatchEntryView.IsVisible = false;
                     MenuButton.Text = "\u25c0\u2013"; // <--
                     MatchButton.IsVisible = false;
+                    MatchMenuView.IsVisible = true;
+                    MatchMenuView.IsEnabled = true;
                     break;
                 case 2:
                     TeamNumber.IsEnabled = false;
@@ -201,7 +206,7 @@ namespace BertScout2022
             Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
         }
 
-        private void Tied_Button_Clicked (object sender, EventArgs e)
+        private void Tied_Button_Clicked(object sender, EventArgs e)
         {
             teamMatch.MatchRP = 1;
             Win_Tie_Lost_Button_Background(teamMatch.MatchRP);
@@ -256,6 +261,16 @@ namespace BertScout2022
             Rate3Button.BackgroundColor = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
             Rate4Button.BackgroundColor = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
             Rate5Button.BackgroundColor = (value == 5) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+
+        private async void Button_SendToAirtable(object sender, EventArgs e)
+        {
+            List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+            await AirtableDB.AirtableSendRecords(matches);
+            foreach (TeamMatch match in matches)
+            {
+                _ = await App.Database.SaveTeamMatchAsync(match);
+            }
         }
     }
 }

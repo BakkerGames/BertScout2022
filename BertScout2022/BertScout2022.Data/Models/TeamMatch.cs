@@ -19,7 +19,7 @@ namespace BertScout2022.Data.Models
         public string ScouterName { get; set; }
 
         // autonomous
-        public bool MovedOffStart { get; set; }
+        public int LeftTarmac { get; set; }
         public int AutoHighGoals { get; set; }
         public int AutoLowGoals { get; set; }
         public int HumanHighGoals { get; set; }
