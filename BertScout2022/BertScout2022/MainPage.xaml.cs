@@ -255,7 +255,7 @@ namespace BertScout2022
         }
         private void Human_Lower_Hub_Output(int value)
         {
-            Human_Lower_Hub.Text = ("Upper Hub: " + value);
+            Human_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
         {
@@ -299,7 +299,7 @@ namespace BertScout2022
         }
         private void Teleop_Lower_Hub_Output(int value)
         {
-            Teleop_Lower_Hub.Text = ("Upper Hub: " + value);
+            Teleop_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Climbed_None_Clicked(object sender, EventArgs e)
         {
