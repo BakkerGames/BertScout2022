@@ -14,7 +14,7 @@
             BackgroundColor="White">
             <Frame
                 BackgroundColor="#007F00"
-                Margin="0,0,0,0"
+                Margin="0,0,20,0"
                 Padding="10,4,10,4"
                 CornerRadius="0"
                 >
@@ -34,6 +34,7 @@
                         HorizontalOptions="Center"
                         TextColor="White" 
                         VerticalOptions="Center"
+                        Margin="0,0,10,0"
                         />
                     <Button
                         x:Name="MatchButton"
@@ -44,6 +45,7 @@
                         HorizontalOptions="End"
                         FontSize="Small"
                         BackgroundColor="White"
+                        Margin="0,0,15,0"
                         />
                 </Grid>
             </Frame>
@@ -113,7 +115,7 @@
                             <Button
                                 x:Name="Moved_Off_Start_Button"
                                 WidthRequest="150"
-                                Text="Moved Off Start"
+                                Text="Moved Off Tarmac"
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Moved_Off_Start_Clicked"
                                 Margin="0,0,10,0"
@@ -121,33 +123,145 @@
                         </StackLayout>
                         <AbsoluteLayout>
                             <Label
-                                Margin="181,0"
+                                Margin="51,0"
+                                Padding="0,10,0,0"
                                 x:Name="Auto_Lower_Hub"
                                 BackgroundColor="#008000"
                                 TextColor="Black"
-                                FontSize="14"
-                                HeightRequest="25"
-                                WidthRequest="100"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
                                 Text="Lower Hub: 0"
                                 />
                             <Button
-                                Margin="231,25"
-                                x:Name="Lower_Hub_Plus"
-                                WidthRequest="50"
-                                HeightRequest="25"
-                                FontSize="10"
-                                Text="+"
-                                BackgroundColor="#bfbfbf"
-                                Clicked="Lower_Hub_Plus_Clicked"
-                                />
-                            <Button
-                                x:Name="Lower_Hub_Minus"
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Lower_Hub_Plus"
                                 WidthRequest="50"
                                 HeightRequest="50"
-                                FontSize="10"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
                                 Text="-"
                                 BackgroundColor="#bfbfbf"
-                                Clicked="Lower_Hub_Minus_Clicked"
+                                Clicked="Auto_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Auto_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Upper_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
+                        <StackLayout>
+                            <Label
+                                Margin="0,0,10,0"
+                                BackgroundColor="Green"
+                                TextColor="White"
+                                HorizontalTextAlignment="Center"
+                                Text="Human Goals"
+                                />
+                        </StackLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="51,0"
+                                Padding="0,10,0,0"
+                                x:Name="Human_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Human_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Upper_Hub_Minus_Clicked"
                                 />
                         </AbsoluteLayout>
                         <Label
@@ -158,6 +272,73 @@
                             HorizontalTextAlignment="Center"
                         />
                         <!--add teleop fields here-->
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="51,0"
+                                Padding="0,10,0,0"
+                                x:Name="Teleop_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Teleop_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Upper_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
                         <Label
                             BackgroundColor="#007F00"
                             TextColor="White"

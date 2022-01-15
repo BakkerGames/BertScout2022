@@ -1,14 +1,12 @@
 ﻿using BertScout2022.Data.Models;
 using System;
 using Xamarin.Forms;
-
 namespace BertScout2022
 {
     public partial class MainPage : ContentPage
     {
         private TeamMatch teamMatch;
         private int _state;
-        private int autoLowerHub = 0;
         static public Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         static public Color SelectedButtonColor = Color.FromHex("#008000");
         public MainPage()
@@ -87,6 +85,12 @@ namespace BertScout2022
             Climbed_Button_Background(-1);
             Win_Tie_Lost_Button_Background(-1);
             Rating_Button_Background(-1);
+            Auto_Lower_Hub_Output(0);
+            Auto_Upper_Hub_Output(0);
+            Human_Upper_Hub_Output(0);
+            Human_Lower_Hub_Output(0);
+            Teleop_Lower_Hub_Output(0);
+            Teleop_Upper_Hub_Output(0);
         }
 
         private void FillAllFields(TeamMatch item)
@@ -96,6 +100,12 @@ namespace BertScout2022
             Climbed_Button_Background(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
+            Auto_Lower_Hub_Output(item.AutoLowGoals);
+            Auto_Upper_Hub_Output(item.AutoHighGoals);
+            Human_Upper_Hub_Output(item.HumanHighGoals);
+            Human_Lower_Hub_Output(item.HumanLowGoals);
+            Teleop_Lower_Hub_Output(item.TeleLowGoals);
+            Teleop_Upper_Hub_Output(item.TeleHighGoals);
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -150,27 +160,137 @@ namespace BertScout2022
         {
             Moved_Off_Start_Button.Background = (value) ? SelectedButtonColor : UnselectedButtonColor;
         }
-        private void Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        private void Auto_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
         {
-            autoLowerHub++;
-            if (autoLowerHub < 0)
+            teamMatch.AutoLowGoals++;
+            if (teamMatch.AutoLowGoals < 0)
             {
-                autoLowerHub = 0;
+                teamMatch.AutoLowGoals = 0;
             }
-            Auto_Lower_Hub_Output(autoLowerHub);
+            Auto_Lower_Hub_Output(teamMatch.AutoLowGoals);
         }
-        private void Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        private void Auto_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
         {
-            autoLowerHub--;
-            if (autoLowerHub < 0)
+            teamMatch.AutoLowGoals--;
+            if (teamMatch.AutoLowGoals < 0)
             {
-                autoLowerHub = 0;
+                teamMatch.AutoLowGoals = 0;
             }
-            Auto_Lower_Hub_Output(autoLowerHub);
+            Auto_Lower_Hub_Output(teamMatch.AutoLowGoals);
         }
         private void Auto_Lower_Hub_Output(int value)
         {
             Auto_Lower_Hub.Text = ("Lower Hub: " + value);
+        }
+        private void Auto_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoHighGoals++;
+            if (teamMatch.AutoHighGoals < 0)
+            {
+                teamMatch.AutoHighGoals = 0;
+            }
+            Auto_Upper_Hub_Output(teamMatch.AutoHighGoals);
+        }
+        private void Auto_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoHighGoals--;
+            if (teamMatch.AutoHighGoals < 0)
+            {
+                teamMatch.AutoHighGoals = 0;
+            }
+            Auto_Upper_Hub_Output(teamMatch.AutoHighGoals);
+        }
+        private void Auto_Upper_Hub_Output(int value)
+        {
+            Auto_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Human_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanHighGoals++;
+            if(teamMatch.HumanHighGoals < 0)
+            {
+                teamMatch.HumanHighGoals = 0;
+            }
+            Human_Upper_Hub_Output(teamMatch.HumanHighGoals);
+        }
+        private void Human_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanHighGoals--;
+            if (teamMatch.HumanHighGoals < 0)
+            {
+                teamMatch.HumanHighGoals = 0;
+            }
+            Human_Upper_Hub_Output(teamMatch.HumanHighGoals);
+        }
+        private void Human_Upper_Hub_Output(int value)
+        {
+            Human_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Human_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanLowGoals++;
+            if (teamMatch.HumanLowGoals < 0)
+            {
+                teamMatch.HumanLowGoals = 0;
+            }
+            Human_Lower_Hub_Output(teamMatch.HumanLowGoals);
+        }
+        private void Human_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanLowGoals--;
+            if (teamMatch.HumanLowGoals < 0)
+            {
+                teamMatch.HumanLowGoals = 0;
+            }
+            Human_Lower_Hub_Output(teamMatch.HumanLowGoals);
+        }
+        private void Human_Lower_Hub_Output(int value)
+        {
+            Human_Lower_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleHighGoals++;
+            if(teamMatch.TeleHighGoals < 0)
+            {
+                teamMatch.TeleHighGoals = 0;
+            }
+            Teleop_Upper_Hub_Output(teamMatch.TeleHighGoals);
+        }
+        private void Teleop_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleHighGoals--;
+            if (teamMatch.TeleHighGoals < 0)
+            {
+                teamMatch.TeleHighGoals = 0;
+            }
+            Teleop_Upper_Hub_Output(teamMatch.TeleHighGoals);
+        }
+        private void Teleop_Upper_Hub_Output(int value)
+        {
+            Teleop_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Teleop_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleLowGoals++;
+            if (teamMatch.TeleLowGoals < 0)
+            {
+                teamMatch.TeleLowGoals = 0;
+            }
+            Teleop_Lower_Hub_Output(teamMatch.TeleLowGoals);
+        }
+        private void Teleop_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleLowGoals--;
+            if (teamMatch.TeleLowGoals < 0)
+            {
+                teamMatch.TeleLowGoals = 0;
+            }
+            Teleop_Lower_Hub_Output(teamMatch.TeleLowGoals);
+        }
+        private void Teleop_Lower_Hub_Output(int value)
+        {
+            Teleop_Lower_Hub.Text = ("Upper Hub: " + value);
         }
         private void Climbed_None_Clicked(object sender, EventArgs e)
         {
