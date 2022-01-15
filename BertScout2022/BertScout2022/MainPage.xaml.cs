@@ -99,7 +99,7 @@ namespace BertScout2022
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
-            Moved_Off_Start(item.MovedOffStart);
+            Moved_Off_Start(item.LeftTarmac == 1);
             Climbed_Button_Background(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
@@ -162,8 +162,8 @@ namespace BertScout2022
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
         {
-            teamMatch.MovedOffStart = !(teamMatch.MovedOffStart);
-            Moved_Off_Start(teamMatch.MovedOffStart);
+            teamMatch.LeftTarmac = (-teamMatch.LeftTarmac) + 1;
+            Moved_Off_Start(teamMatch.LeftTarmac == 1);
         }
         private void Moved_Off_Start(bool value)
         {
@@ -216,7 +216,7 @@ namespace BertScout2022
         private void Human_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
         {
             teamMatch.HumanHighGoals++;
-            if(teamMatch.HumanHighGoals < 0)
+            if (teamMatch.HumanHighGoals < 0)
             {
                 teamMatch.HumanHighGoals = 0;
             }
@@ -260,7 +260,7 @@ namespace BertScout2022
         private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
         {
             teamMatch.TeleHighGoals++;
-            if(teamMatch.TeleHighGoals < 0)
+            if (teamMatch.TeleHighGoals < 0)
             {
                 teamMatch.TeleHighGoals = 0;
             }
