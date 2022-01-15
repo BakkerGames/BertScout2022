@@ -404,7 +404,15 @@ namespace BertScout2022
         private async void Button_SendToAirtable(object sender, EventArgs e)
         {
             List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
-            await AirtableDB.AirtableSendRecords(matches);
+            try
+            {
+                await AirtableDB.AirtableSendRecords(matches);
+            }
+            catch (Exception ex)
+            {
+                ResultsLabel.Text = ex.Message + "\n" + ex.InnerException.Message;
+                return;
+            }
             foreach (TeamMatch match in matches)
             {
                 match.Changed = false;
