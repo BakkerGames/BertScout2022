@@ -117,6 +117,7 @@ namespace BertScout2022
             {
                 item.ScouterName = ScouterName.Text;
             }
+            item.Changed = true;
         }
 
         private void SetState(int stateNumber)
