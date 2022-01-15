@@ -142,6 +142,8 @@ namespace BertScout2022
                     ScouterName.IsEnabled = true;
                     MatchEntryView.IsVisible = true;
                     MatchEntryBody.IsVisible = false;
+                    MatchMenuView.IsVisible = false;
+                    MatchMenuView.IsEnabled = false;
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
@@ -156,6 +158,8 @@ namespace BertScout2022
                     ScouterName.IsEnabled = true;
                     MenuButton.IsVisible = false;
                     MatchEntryBody.IsVisible = true;
+                    MatchMenuView.IsVisible = false;
+                    MatchMenuView.IsEnabled = false;
                     MatchButton.Text = "Save";
                     break;
                 default:

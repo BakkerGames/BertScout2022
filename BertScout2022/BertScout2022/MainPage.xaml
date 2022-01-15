@@ -245,21 +245,37 @@
                 IsVisible="False"
                 IsEnabled="False"
                 BackgroundColor="White"
-                VerticalOptions="Start"
-                HorizontalOptions="Start"
                 Margin="0"
                 Padding="10,0,0,10">
-                <Button
-                    x:Name="SendToAirtable"
-                    WidthRequest="200"
-                    HeightRequest="50"
-                    TextColor="Black"
-                    BackgroundColor="#bfbfbf"
-                    Text="Send to Airtable"
-                    Clicked="Button_SendToAirtable"
-                />
+                <StackLayout Orientation="Vertical">
+                    <StackLayout 
+                        Orientation="Horizontal"
+                        HorizontalOptions="CenterAndExpand"
+                        >
+                    <Button
+                        x:Name="SendToAirtable"
+                        WidthRequest="200"
+                        HeightRequest="50"
+                        TextColor="Black"
+                        BackgroundColor="#808080"
+                        HorizontalOptions="Center"
+                        Text="Send to Airtable"
+                        Clicked="Button_SendToAirtable"
+                    />
+                </StackLayout>
+                <StackLayout 
+                    Orientation="Vertical"
+                    VerticalOptions="FillAndExpand"
+                    >
+                        <Label
+                            x:Name="ResultsLabel"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="StartAndExpand"
+                            Text="&lt;text here&gt;"
+                        />
+                    </StackLayout>
+                </StackLayout>
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>
-
 </ContentPage>
