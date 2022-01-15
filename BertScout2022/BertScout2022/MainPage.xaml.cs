@@ -8,6 +8,7 @@ namespace BertScout2022
     {
         private TeamMatch teamMatch;
         private int _state;
+        private int autoLowerHub = 0;
         static public Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         static public Color SelectedButtonColor = Color.FromHex("#008000");
         public MainPage()
@@ -148,6 +149,28 @@ namespace BertScout2022
         private void Moved_Off_Start(bool value)
         {
             Moved_Off_Start_Button.Background = (value) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+        private void Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            autoLowerHub++;
+            if (autoLowerHub < 0)
+            {
+                autoLowerHub = 0;
+            }
+            Auto_Lower_Hub_Output(autoLowerHub);
+        }
+        private void Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            autoLowerHub--;
+            if (autoLowerHub < 0)
+            {
+                autoLowerHub = 0;
+            }
+            Auto_Lower_Hub_Output(autoLowerHub);
+        }
+        private void Auto_Lower_Hub_Output(int value)
+        {
+            Auto_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Climbed_None_Clicked(object sender, EventArgs e)
         {

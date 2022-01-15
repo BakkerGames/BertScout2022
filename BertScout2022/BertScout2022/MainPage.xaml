@@ -109,17 +109,49 @@
                             HorizontalTextAlignment="Center"
                         />
                         <!--add auto fields here-->
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout>
                             <Button
                                 x:Name="Moved_Off_Start_Button"
-                                WidthRequest="200"
+                                WidthRequest="150"
                                 Text="Moved Off Start"
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Moved_Off_Start_Clicked"
+                                Margin="0,0,10,0"
                                 />
                         </StackLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="181,0"
+                                x:Name="Auto_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="14"
+                                HeightRequest="25"
+                                WidthRequest="100"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="231,25"
+                                x:Name="Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="25"
+                                FontSize="10"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                x:Name="Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="10"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Lower_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
                         <Label
-                            BackgroundColor="#007F00"
+                            BackgroundColor="#008000"
                             TextColor="White"
                             Text="Teleoperated"
                             Margin="0,0,10,0"
@@ -133,6 +165,7 @@
                             Margin="0,0,10,0"
                             HorizontalTextAlignment="Center"
                         />
+                        <!--endgame fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label
                                 Text="Climbed:" 
@@ -184,12 +217,12 @@
                         <!--add results fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Match Result:"/>
-                            <Button 
-                                x:Name="WonButton"
+                            <Button
+                                x:Name="LostButton"
                                 WidthRequest="100"
-                                Text="Won"
+                                Text="Lost"
                                 BackgroundColor="#bfbfbf"
-                                Clicked="Won_Button_Clicked"
+                                Clicked="Lost_Button_Clicked"
                                 />
                             <Button
                                 x:Name="TiedButton"
@@ -198,12 +231,12 @@
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Tied_Button_Clicked"
                                 />
-                            <Button
-                                x:Name="LostButton"
+                            <Button 
+                                x:Name="WonButton"
                                 WidthRequest="100"
-                                Text="Lost"
+                                Text="Won"
                                 BackgroundColor="#bfbfbf"
-                                Clicked="Lost_Button_Clicked"
+                                Clicked="Won_Button_Clicked"
                                 />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
