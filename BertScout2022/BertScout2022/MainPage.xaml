@@ -14,7 +14,7 @@
             BackgroundColor="White">
             <Frame
                 BackgroundColor="#007F00"
-                Margin="0,0,0,0"
+                Margin="0,0,20,0"
                 Padding="10,4,10,4"
                 CornerRadius="0"
                 >
@@ -34,6 +34,7 @@
                         HorizontalOptions="Center"
                         TextColor="White" 
                         VerticalOptions="Center"
+                        Margin="0,0,10,0"
                         />
                     <Button
                         x:Name="MatchButton"
@@ -44,6 +45,7 @@
                         HorizontalOptions="End"
                         FontSize="Small"
                         BackgroundColor="White"
+                        Margin="0,0,15,0"
                         />
                 </Grid>
             </Frame>
@@ -109,20 +111,234 @@
                             HorizontalTextAlignment="Center"
                         />
                         <!--add auto fields here-->
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Moved off start:"></Label>
-                            <CheckBox
-                                x:Name="MovedOffStartCheckbox"
+                        <StackLayout>
+                            <Button
+                                x:Name="Moved_Off_Start_Button"
+                                WidthRequest="150"
+                                Text="Moved Off Tarmac"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Moved_Off_Start_Clicked"
+                                Margin="0,0,10,0"
                                 />
                         </StackLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="51,0"
+                                Padding="0,10,0,0"
+                                x:Name="Auto_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Auto_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Auto_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Auto_Upper_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
+                        <StackLayout>
+                            <Label
+                                Margin="0,0,10,0"
+                                BackgroundColor="Green"
+                                TextColor="White"
+                                HorizontalTextAlignment="Center"
+                                Text="Human Goals"
+                                />
+                        </StackLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="51,0"
+                                Padding="0,10,0,0"
+                                x:Name="Human_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Human_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Human_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Human_Upper_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
                         <Label
-                            BackgroundColor="#007F00"
+                            BackgroundColor="#008000"
                             TextColor="White"
                             Text="Teleoperated"
                             Margin="0,0,10,0"
                             HorizontalTextAlignment="Center"
                         />
                         <!--add teleop fields here-->
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="51,0"
+                                Padding="0,10,0,0"
+                                x:Name="Teleop_Lower_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Lower Hub: 0"
+                                />
+                            <Button
+                                Margin="202,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Lower_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Lower_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Lower_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Lower_Hub_Minus_Clicked"
+                                />
+                            <Label
+                                Margin="360,0"
+                                Padding="0,10,0,0"
+                                x:Name="Teleop_Upper_Hub"
+                                BackgroundColor="#008000"
+                                TextColor="Black"
+                                FontSize="20"
+                                HeightRequest="50"
+                                WidthRequest="150"
+                                Text="Upper Hub: 0"
+                                />
+                            <Button
+                                Margin="511,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Upper_Hub_Plus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="+"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Upper_Hub_Plus_Clicked"
+                                />
+                            <Button
+                                Margin="309,0"
+                                Padding="0,-9,0,0"
+                                x:Name="Teleop_Upper_Hub_Minus"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                FontSize="25"
+                                Text="-"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Teleop_Upper_Hub_Minus_Clicked"
+                                />
+                        </AbsoluteLayout>
                         <Label
                             BackgroundColor="#007F00"
                             TextColor="White"
@@ -130,33 +346,45 @@
                             Margin="0,0,10,0"
                             HorizontalTextAlignment="Center"
                         />
+                        <!--endgame fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label
                                 Text="Climbed:" 
                                 />
-                            <Label Text="Low"/>
-                            <CheckBox 
+                            <Button
+                                x:Name="Climbed0"
+                                WidthRequest="75"
+                                Text="None"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed_None_Clicked"
+                                />
+                            <Button
                                 x:Name="Climbed1"
-                                IsChecked="False"
-                                CheckedChanged="Climbed1_CheckedChanged"
+                                WidthRequest="75"
+                                Text="Low"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed1_Clicked"
                                 />
-                            <Label Text="Mid"/>
-                            <CheckBox 
+                            <Button 
                                 x:Name="Climbed2"
-                                IsChecked="False"
-                                CheckedChanged="Climbed2_CheckedChanged"
+                                WidthRequest="75"
+                                Text="Mid"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed2_Clicked"
                                 />
-                            <Label Text="High"/>
-                            <CheckBox 
+                            <Button
                                 x:Name="Climbed3"
-                                IsChecked="False"
-                                CheckedChanged="Climbed3_CheckedChanged"
+                                WidthRequest="75"
+                                Text="High"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed3_Clicked"
                                 />
-                            <Label Text="Traversal"/>
-                            <CheckBox 
+                            <Button
                                 x:Name="Climbed4"
-                                IsChecked="False"
-                                CheckedChanged="Climbed4_CheckedChanged"
+                                WidthRequest="126"
+                                Text="Traversal"
+                                BackgroundColor="#bfbfbf"
+                                Clicked="Climbed4_Clicked"
                                 />
                         </StackLayout>
                         <!--add end game fields here-->
@@ -170,12 +398,12 @@
                         <!--add results fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Match Result:"/>
-                            <Button 
-                                x:Name="WonButton"
+                            <Button
+                                x:Name="LostButton"
                                 WidthRequest="100"
-                                Text="Won"
+                                Text="Lost"
                                 BackgroundColor="#bfbfbf"
-                                Clicked="Won_Button_Clicked"
+                                Clicked="Lost_Button_Clicked"
                                 />
                             <Button
                                 x:Name="TiedButton"
@@ -184,12 +412,12 @@
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Tied_Button_Clicked"
                                 />
-                            <Button
-                                x:Name="LostButton"
+                            <Button 
+                                x:Name="WonButton"
                                 WidthRequest="100"
-                                Text="Lost"
+                                Text="Won"
                                 BackgroundColor="#bfbfbf"
-                                Clicked="Lost_Button_Clicked"
+                                Clicked="Won_Button_Clicked"
                                 />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">

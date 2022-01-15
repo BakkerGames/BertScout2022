@@ -3,7 +3,6 @@ using BertScout2022.Airtable;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
-
 namespace BertScout2022
 {
     public partial class MainPage : ContentPage
@@ -85,30 +84,31 @@ namespace BertScout2022
 
         private void ClearAllFields()
         {
-            MovedOffStartCheckbox.IsChecked = false;
-            Climbed1.IsChecked = false;
-            Climbed2.IsChecked = false;
-            Climbed3.IsChecked = false;
-            Climbed4.IsChecked = false;
+            Moved_Off_Start(false);
+            Climbed_Button_Background(-1);
             Win_Tie_Lost_Button_Background(-1);
             Rating_Button_Background(-1);
+            Auto_Lower_Hub_Output(0);
+            Auto_Upper_Hub_Output(0);
+            Human_Upper_Hub_Output(0);
+            Human_Lower_Hub_Output(0);
+            Teleop_Lower_Hub_Output(0);
+            Teleop_Upper_Hub_Output(0);
         }
 
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
-            MovedOffStartCheckbox.IsChecked = item.LeftTarmac == 1;
-            FillClimbedCheckBoxes(item.ClimbLevel);
+            Moved_Off_Start(item.MovedOffStart);
+            Climbed_Button_Background(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
-        }
-
-        private void FillClimbedCheckBoxes(int climbLevel)
-        {
-            Climbed1.IsChecked = (climbLevel == 1);
-            Climbed2.IsChecked = (climbLevel == 2);
-            Climbed3.IsChecked = (climbLevel == 3);
-            Climbed4.IsChecked = (climbLevel == 4);
+            Auto_Lower_Hub_Output(item.AutoLowGoals);
+            Auto_Upper_Hub_Output(item.AutoHighGoals);
+            Human_Upper_Hub_Output(item.HumanHighGoals);
+            Human_Lower_Hub_Output(item.HumanLowGoals);
+            Teleop_Lower_Hub_Output(item.TeleLowGoals);
+            Teleop_Upper_Hub_Output(item.TeleHighGoals);
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -117,13 +117,6 @@ namespace BertScout2022
             {
                 item.ScouterName = ScouterName.Text;
             }
-            item.LeftTarmac = MovedOffStartCheckbox.IsChecked ? 1 : 0;
-            item.ClimbLevel = 0;
-            if (Climbed1.IsChecked) item.ClimbLevel = 1;
-            if (Climbed2.IsChecked) item.ClimbLevel = 2;
-            if (Climbed3.IsChecked) item.ClimbLevel = 3;
-            if (Climbed4.IsChecked) item.ClimbLevel = 4;
-            item.Changed = true;
         }
 
         private void SetState(int stateNumber)
@@ -167,43 +160,182 @@ namespace BertScout2022
             }
             _state = stateNumber;
         }
-
-        private bool _climbedChanging = false;
-
-        private void Climbed1_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Moved_Off_Start_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed1.IsChecked)
-                FillClimbedCheckBoxes(1);
-            _climbedChanging = false;
+            teamMatch.MovedOffStart = !(teamMatch.MovedOffStart);
+            Moved_Off_Start(teamMatch.MovedOffStart);
+        }
+        private void Moved_Off_Start(bool value)
+        {
+            Moved_Off_Start_Button.Background = (value) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+        private void Auto_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoLowGoals++;
+            if (teamMatch.AutoLowGoals < 0)
+            {
+                teamMatch.AutoLowGoals = 0;
+            }
+            Auto_Lower_Hub_Output(teamMatch.AutoLowGoals);
+        }
+        private void Auto_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoLowGoals--;
+            if (teamMatch.AutoLowGoals < 0)
+            {
+                teamMatch.AutoLowGoals = 0;
+            }
+            Auto_Lower_Hub_Output(teamMatch.AutoLowGoals);
+        }
+        private void Auto_Lower_Hub_Output(int value)
+        {
+            Auto_Lower_Hub.Text = ("Lower Hub: " + value);
+        }
+        private void Auto_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoHighGoals++;
+            if (teamMatch.AutoHighGoals < 0)
+            {
+                teamMatch.AutoHighGoals = 0;
+            }
+            Auto_Upper_Hub_Output(teamMatch.AutoHighGoals);
+        }
+        private void Auto_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.AutoHighGoals--;
+            if (teamMatch.AutoHighGoals < 0)
+            {
+                teamMatch.AutoHighGoals = 0;
+            }
+            Auto_Upper_Hub_Output(teamMatch.AutoHighGoals);
+        }
+        private void Auto_Upper_Hub_Output(int value)
+        {
+            Auto_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Human_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanHighGoals++;
+            if(teamMatch.HumanHighGoals < 0)
+            {
+                teamMatch.HumanHighGoals = 0;
+            }
+            Human_Upper_Hub_Output(teamMatch.HumanHighGoals);
+        }
+        private void Human_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanHighGoals--;
+            if (teamMatch.HumanHighGoals < 0)
+            {
+                teamMatch.HumanHighGoals = 0;
+            }
+            Human_Upper_Hub_Output(teamMatch.HumanHighGoals);
+        }
+        private void Human_Upper_Hub_Output(int value)
+        {
+            Human_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Human_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanLowGoals++;
+            if (teamMatch.HumanLowGoals < 0)
+            {
+                teamMatch.HumanLowGoals = 0;
+            }
+            Human_Lower_Hub_Output(teamMatch.HumanLowGoals);
+        }
+        private void Human_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.HumanLowGoals--;
+            if (teamMatch.HumanLowGoals < 0)
+            {
+                teamMatch.HumanLowGoals = 0;
+            }
+            Human_Lower_Hub_Output(teamMatch.HumanLowGoals);
+        }
+        private void Human_Lower_Hub_Output(int value)
+        {
+            Human_Lower_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleHighGoals++;
+            if(teamMatch.TeleHighGoals < 0)
+            {
+                teamMatch.TeleHighGoals = 0;
+            }
+            Teleop_Upper_Hub_Output(teamMatch.TeleHighGoals);
+        }
+        private void Teleop_Upper_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleHighGoals--;
+            if (teamMatch.TeleHighGoals < 0)
+            {
+                teamMatch.TeleHighGoals = 0;
+            }
+            Teleop_Upper_Hub_Output(teamMatch.TeleHighGoals);
+        }
+        private void Teleop_Upper_Hub_Output(int value)
+        {
+            Teleop_Upper_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Teleop_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleLowGoals++;
+            if (teamMatch.TeleLowGoals < 0)
+            {
+                teamMatch.TeleLowGoals = 0;
+            }
+            Teleop_Lower_Hub_Output(teamMatch.TeleLowGoals);
+        }
+        private void Teleop_Lower_Hub_Minus_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.TeleLowGoals--;
+            if (teamMatch.TeleLowGoals < 0)
+            {
+                teamMatch.TeleLowGoals = 0;
+            }
+            Teleop_Lower_Hub_Output(teamMatch.TeleLowGoals);
+        }
+        private void Teleop_Lower_Hub_Output(int value)
+        {
+            Teleop_Lower_Hub.Text = ("Upper Hub: " + value);
+        }
+        private void Climbed_None_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ClimbLevel = 0;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
+        }
+        private void Climbed1_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ClimbLevel = 1;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed2_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed2_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed2.IsChecked)
-                FillClimbedCheckBoxes(2);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 2;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed3_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed3_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed3.IsChecked)
-                FillClimbedCheckBoxes(3);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 3;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
         }
 
-        private void Climbed4_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void Climbed4_Clicked(object sender, EventArgs e)
         {
-            if (_climbedChanging) return;
-            _climbedChanging = true;
-            if (Climbed4.IsChecked)
-                FillClimbedCheckBoxes(4);
-            _climbedChanging = false;
+            teamMatch.ClimbLevel = 4;
+            Climbed_Button_Background(teamMatch.ClimbLevel);
+        }
+        private void Climbed_Button_Background(int value)
+        {
+            Climbed0.Background = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed1.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed2.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed3.Background = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
+            Climbed4.Background = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private void Won_Button_Clicked(object sender, EventArgs e)
         {
