@@ -12,13 +12,44 @@
             Orientation="Vertical"
             Margin="0"
             BackgroundColor="White">
+            <AbsoluteLayout
+                x:Name="Back_Popup"
+                IsVisible="false">
+                <Label
+                    Margin="0,90,0,0"
+                    BackgroundColor="White"
+                    TextColor="#008000"
+                    HeightRequest="9999"
+                    WidthRequest="999"
+                    FontSize="15"
+                    Text="Are you sure that you want to go back? This will clear all progress"
+                    />
+                <Button
+                    Margin="150,150,100,100"
+                    x:Name="Verified_Back"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    TextColor="Black"
+                    Text="Yes"
+                    Clicked="Verified_Back_Clicked"
+                    />
+                <Button
+                    x:Name="Cancel_Back"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    TextColor="Black"
+                    Text="No"
+                    Clicked="Cancel_Back_Clicked"
+                    />
+            </AbsoluteLayout>
             <Frame
                 BackgroundColor="#007F00"
                 Margin="0,0,20,0"
                 Padding="10,4,10,4"
                 CornerRadius="0"
                 >
-                <Grid>
+                <Grid
+                    x:Name="Grid_Header">
                     <Button
                         x:Name="MenuButton"
                         Clicked="MenuButton_Clicked"

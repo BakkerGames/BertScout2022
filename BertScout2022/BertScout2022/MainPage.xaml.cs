@@ -24,6 +24,10 @@ namespace BertScout2022
             {
                 SetState(1);
             }
+            else if (_state == 2)
+            {
+                SetState(3);
+            }
             else
             {
                 SetState(0);
@@ -141,6 +145,8 @@ namespace BertScout2022
                     MatchEntryBody.IsVisible = false;
                     MatchMenuView.IsVisible = false;
                     MatchMenuView.IsEnabled = false;
+                    Back_Popup.IsVisible = false;
+                    Grid_Header.IsVisible = true;
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
@@ -148,21 +154,41 @@ namespace BertScout2022
                     MatchButton.IsVisible = false;
                     MatchMenuView.IsVisible = true;
                     MatchMenuView.IsEnabled = true;
+                    Back_Popup.IsVisible = false;
+                    Grid_Header.IsVisible = true;
                     break;
                 case 2:
                     TeamNumber.IsEnabled = false;
                     MatchNumber.IsEnabled = false;
                     ScouterName.IsEnabled = true;
-                    MenuButton.IsVisible = false;
+                    MenuButton.Text = "Back";
                     MatchEntryBody.IsVisible = true;
+                    MatchEntryView.IsVisible = true;
                     MatchMenuView.IsVisible = false;
                     MatchMenuView.IsEnabled = false;
                     MatchButton.Text = "Save";
+                    Back_Popup.IsVisible = false;
+                    Grid_Header.IsVisible = true;
+                    break;
+                case 3:
+                    Back_Popup.IsVisible = true;
+                    MatchMenuView.IsVisible = false;
+                    MatchEntryView.IsVisible = false;
+                    MatchEntryBody.IsVisible = false;
+                    Grid_Header.IsVisible = false;
                     break;
                 default:
                     break;
             }
             _state = stateNumber;
+        }
+        private void Verified_Back_Clicked(object sender, EventArgs e)
+        {
+            SetState(0);
+        }
+        private void Cancel_Back_Clicked(object sender, EventArgs e)
+        {
+            SetState(2);
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
         {
