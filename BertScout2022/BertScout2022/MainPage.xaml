@@ -498,6 +498,25 @@
                                 />
                         </StackLayout>
                         <AbsoluteLayout>
+                            <Button
+                                x:Name="CargoRP"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="CargoRP"
+                                Clicked="CargoRP_Clicked"
+                                />
+                            <Button
+                                x:Name="ClimbRP"
+                                TranslationX="311"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="ClimbRP"
+                                Clicked="ClimbRP_Clicked"
+                                />
+                        </AbsoluteLayout>
+                        <AbsoluteLayout>
                             <Label
                                 Margin="4,6,0,0"
                                 WidthRequest="115"

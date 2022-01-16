@@ -9,6 +9,7 @@ namespace BertScout2022
     {
         private TeamMatch teamMatch;
         private int _state;
+        private string deleteMatchPassword = "bert133";
         public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         public static Color SelectedButtonColor = Color.FromHex("#008000");
 
@@ -99,6 +100,8 @@ namespace BertScout2022
             Teleop_Lower_Hub_Output(0);
             Teleop_Upper_Hub_Output(0);
             Comments.Text = "";
+            ClimbRP_Output(0);
+            CargoRP_Output(0);
         }
 
         private void FillAllFields(TeamMatch item)
@@ -115,6 +118,8 @@ namespace BertScout2022
             Teleop_Lower_Hub_Output(item.TeleLowGoals);
             Teleop_Upper_Hub_Output(item.TeleHighGoals);
             Comments.Text = item.Comments;
+            ClimbRP_Output(teamMatch.ClimbRP);
+            CargoRP_Output(teamMatch.CargoRP);
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -197,7 +202,7 @@ namespace BertScout2022
         }
         private void Delete_Match_Clicked(object sender, EventArgs e)
         {
-            if (Delete_Match_Password.Text == "bert133")
+            if (Delete_Match_Password.Text == deleteMatchPassword)
             {
                 Climbed_Button_Background(-1);
                 Win_Tie_Lost_Button_Background(-1);
@@ -211,6 +216,8 @@ namespace BertScout2022
                 Teleop_Upper_Hub_Output(0);
                 Teleop_Lower_Hub_Output(0);
                 Moved_Off_Start(0);
+                ClimbRP_Output(0);
+                CargoRP_Output(0);
             }
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
@@ -462,7 +469,26 @@ namespace BertScout2022
             Rate5Button.BackgroundColor = (value == 5) ? SelectedButtonColor : UnselectedButtonColor;
             teamMatch.ScouterRating = value;
         }
-
+        private void CargoRP_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.CargoRP = -(teamMatch.CargoRP) + 1;
+            CargoRP_Output(teamMatch.CargoRP);
+        }
+        private void CargoRP_Output(int value)
+        {
+            teamMatch.CargoRP = value;
+            CargoRP.Background = (teamMatch.CargoRP == 1) ? SelectedButtonColor : UnselectedButtonColor;
+        }
+        private void ClimbRP_Clicked(object sender, EventArgs e)
+        {
+            teamMatch.ClimbRP = -(teamMatch.ClimbRP) + 1;
+            ClimbRP_Output(teamMatch.ClimbRP);
+        }
+        private void ClimbRP_Output(int value)
+        {
+            teamMatch.ClimbRP = value;
+            ClimbRP.Background = (teamMatch.ClimbRP == 1) ? SelectedButtonColor : UnselectedButtonColor;
+        }
         private async void Button_SendToAirtable(object sender, EventArgs e)
         {
             List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
