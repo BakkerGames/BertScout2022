@@ -88,7 +88,7 @@ namespace BertScout2022
 
         private void ClearAllFields()
         {
-            Moved_Off_Start(false);
+            Moved_Off_Start(0);
             Climbed_Button_Background(-1);
             Win_Tie_Lost_Button_Background(-1);
             Rating_Button_Background(-1);
@@ -104,7 +104,7 @@ namespace BertScout2022
         private void FillAllFields(TeamMatch item)
         {
             ScouterName.Text = item.ScouterName;
-            Moved_Off_Start(item.LeftTarmac == 1);
+            Moved_Off_Start(item.LeftTarmac);
             Climbed_Button_Background(item.ClimbLevel);
             Win_Tie_Lost_Button_Background(item.MatchRP);
             Rating_Button_Background(item.ScouterRating);
@@ -147,6 +147,8 @@ namespace BertScout2022
                     MatchMenuView.IsEnabled = false;
                     Back_Popup.IsVisible = false;
                     Grid_Header.IsVisible = true;
+                    frame.BackgroundColor = Color.FromHex("#008000");
+                    Delete_Match_Password.Text = "";
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
@@ -156,6 +158,7 @@ namespace BertScout2022
                     MatchMenuView.IsEnabled = true;
                     Back_Popup.IsVisible = false;
                     Grid_Header.IsVisible = true;
+                    frame.BackgroundColor = Color.FromHex("#008000");
                     break;
                 case 2:
                     TeamNumber.IsEnabled = false;
@@ -169,6 +172,7 @@ namespace BertScout2022
                     MatchButton.Text = "Save";
                     Back_Popup.IsVisible = false;
                     Grid_Header.IsVisible = true;
+                    frame.BackgroundColor = Color.FromHex("#008000");
                     break;
                 case 3:
                     Back_Popup.IsVisible = true;
@@ -176,6 +180,7 @@ namespace BertScout2022
                     MatchEntryView.IsVisible = false;
                     MatchEntryBody.IsVisible = false;
                     Grid_Header.IsVisible = false;
+                    frame.BackgroundColor = Color.FromHex("White");
                     break;
                 default:
                     break;
@@ -190,14 +195,33 @@ namespace BertScout2022
         {
             SetState(2);
         }
+        private void Delete_Match_Clicked(object sender, EventArgs e)
+        {
+            if (Delete_Match_Password.Text == "bert133")
+            {
+                Climbed_Button_Background(-1);
+                Win_Tie_Lost_Button_Background(-1);
+                Rating_Button_Background(-1);
+                Comments.Text = "";
+                Delete_Match_Password.Text = "";
+                Auto_Upper_Hub_Output(0);
+                Auto_Lower_Hub_Output(0);
+                Human_Upper_Hub_Output(0);
+                Human_Lower_Hub_Output(0);
+                Teleop_Upper_Hub_Output(0);
+                Teleop_Lower_Hub_Output(0);
+                Moved_Off_Start(0);
+            }
+        }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
         {
             teamMatch.LeftTarmac = (-teamMatch.LeftTarmac) + 1;
-            Moved_Off_Start(teamMatch.LeftTarmac == 1);
+            Moved_Off_Start(teamMatch.LeftTarmac);
         }
-        private void Moved_Off_Start(bool value)
+        private void Moved_Off_Start(int value)
         {
-            Moved_Off_Start_Button.Background = (value) ? SelectedButtonColor : UnselectedButtonColor;
+            teamMatch.LeftTarmac = value;
+            Moved_Off_Start_Button.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private void Auto_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
         {
@@ -219,6 +243,7 @@ namespace BertScout2022
         }
         private void Auto_Lower_Hub_Output(int value)
         {
+            teamMatch.AutoLowGoals = value;
             Auto_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Auto_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -241,6 +266,7 @@ namespace BertScout2022
         }
         private void Auto_Upper_Hub_Output(int value)
         {
+            teamMatch.AutoHighGoals = value;
             Auto_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Human_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -263,6 +289,7 @@ namespace BertScout2022
         }
         private void Human_Upper_Hub_Output(int value)
         {
+            teamMatch.HumanHighGoals = value;
             Human_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Human_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -285,6 +312,7 @@ namespace BertScout2022
         }
         private void Human_Lower_Hub_Output(int value)
         {
+            teamMatch.HumanLowGoals = value;
             Human_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -307,6 +335,7 @@ namespace BertScout2022
         }
         private void Teleop_Upper_Hub_Output(int value)
         {
+            teamMatch.TeleHighGoals = value;
             Teleop_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Teleop_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -329,6 +358,7 @@ namespace BertScout2022
         }
         private void Teleop_Lower_Hub_Output(int value)
         {
+            teamMatch.TeleLowGoals = value;
             Teleop_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Climbed_None_Clicked(object sender, EventArgs e)
@@ -366,6 +396,7 @@ namespace BertScout2022
             Climbed2.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
             Climbed3.Background = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
             Climbed4.Background = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
+            teamMatch.ClimbLevel = value;
         }
         private void Won_Button_Clicked(object sender, EventArgs e)
         {
@@ -389,6 +420,7 @@ namespace BertScout2022
             WonButton.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
             TiedButton.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
             LostButton.Background = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
+            teamMatch.MatchRP = value;
         }
         private void Button_Rate0Box_Clicked(object sender, EventArgs e)
         {
@@ -428,6 +460,7 @@ namespace BertScout2022
             Rate3Button.BackgroundColor = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
             Rate4Button.BackgroundColor = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
             Rate5Button.BackgroundColor = (value == 5) ? SelectedButtonColor : UnselectedButtonColor;
+            teamMatch.ScouterRating = value;
         }
 
         private async void Button_SendToAirtable(object sender, EventArgs e)
