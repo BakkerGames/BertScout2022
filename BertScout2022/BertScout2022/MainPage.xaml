@@ -465,6 +465,23 @@
                                 Clicked="Button_Rate5Box_Clicked"
                                 />
                         </StackLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="4,6,0,0"
+                                WidthRequest="115"
+                                Text="Comments: "
+                                />
+                            <Entry
+                                x:Name="Comments"
+                                Margin="130,0,10,0"
+                                WidthRequest="431"
+                                HeightRequest="50"
+                                FontSize="15"
+                                VerticalTextAlignment="Start"
+                                HorizontalTextAlignment="Start"
+                                Text=" "
+                                />
+                        </AbsoluteLayout>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

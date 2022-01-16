@@ -94,6 +94,7 @@ namespace BertScout2022
             Human_Lower_Hub_Output(0);
             Teleop_Lower_Hub_Output(0);
             Teleop_Upper_Hub_Output(0);
+            Comments.Text = "";
         }
 
         private void FillAllFields(TeamMatch item)
@@ -109,6 +110,7 @@ namespace BertScout2022
             Human_Lower_Hub_Output(item.HumanLowGoals);
             Teleop_Lower_Hub_Output(item.TeleLowGoals);
             Teleop_Upper_Hub_Output(item.TeleHighGoals);
+            Comments.Text = item.Comments;
         }
 
         private void SaveAllFields(TeamMatch item)
@@ -117,6 +119,7 @@ namespace BertScout2022
             {
                 item.ScouterName = ScouterName.Text;
             }
+            item.Comments = Comments.Text;
             item.Changed = true;
         }
 
