@@ -12,13 +12,45 @@
             Orientation="Vertical"
             Margin="0"
             BackgroundColor="White">
+            <AbsoluteLayout
+                x:Name="Back_Popup"
+                IsVisible="false">
+                <Label
+                    Margin="0,90,0,0"
+                    BackgroundColor="White"
+                    TextColor="#008000"
+                    HeightRequest="9999"
+                    WidthRequest="999"
+                    FontSize="15"
+                    Text="Are you sure that you want to go back? This will clear all progress"
+                    />
+                <Button
+                    Margin="150,150,100,100"
+                    x:Name="Verified_Back"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    TextColor="Black"
+                    Text="Yes"
+                    Clicked="Verified_Back_Clicked"
+                    />
+                <Button
+                    x:Name="Cancel_Back"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    TextColor="Black"
+                    Text="No"
+                    Clicked="Cancel_Back_Clicked"
+                    />
+            </AbsoluteLayout>
             <Frame
-                BackgroundColor="#007F00"
+                x:Name="frame"
+                BackgroundColor="#008000"
                 Margin="0,0,20,0"
                 Padding="10,4,10,4"
                 CornerRadius="0"
                 >
-                <Grid>
+                <Grid
+                    x:Name="Grid_Header">
                     <Button
                         x:Name="MenuButton"
                         Clicked="MenuButton_Clicked"
@@ -465,6 +497,62 @@
                                 Clicked="Button_Rate5Box_Clicked"
                                 />
                         </StackLayout>
+                        <AbsoluteLayout>
+                            <Button
+                                x:Name="CargoRP"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="CargoRP"
+                                Clicked="CargoRP_Clicked"
+                                />
+                            <Button
+                                x:Name="ClimbRP"
+                                TranslationX="311"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="ClimbRP"
+                                Clicked="ClimbRP_Clicked"
+                                />
+                        </AbsoluteLayout>
+                        <AbsoluteLayout>
+                            <Label
+                                Margin="4,6,0,0"
+                                WidthRequest="115"
+                                Text="Comments: "
+                                />
+                            <Entry
+                                x:Name="Comments"
+                                Margin="130,0,10,0"
+                                WidthRequest="431"
+                                HeightRequest="50"
+                                FontSize="15"
+                                VerticalTextAlignment="Start"
+                                HorizontalTextAlignment="Start"
+                                Text=""
+                                />
+                        </AbsoluteLayout>
+                        <AbsoluteLayout>
+                            <Button
+                                x:Name="Delete_Match"
+                                BackgroundColor="Red"
+                                WidthRequest="200"
+                                HeightRequest="50"
+                                Text="Delete Match"
+                                Clicked="Delete_Match_Clicked"
+                                />
+                            <Entry
+                                x:Name="Delete_Match_Password"
+                                Margin="210,0,10,0"
+                                WidthRequest="351"
+                                HeightRequest="50"
+                                FontSize="20"
+                                VerticalTextAlignment="Start"
+                                HorizontalTextAlignment="Start"
+                                Text=""
+                                />
+                        </AbsoluteLayout>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
