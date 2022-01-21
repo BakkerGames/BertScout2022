@@ -590,6 +590,27 @@
                             Text="&lt;text here&gt;"
                         />
                     </StackLayout>
+                    <AbsoluteLayout>
+                        <Button
+                            x:Name="DeleteAllMatches"
+                            WidthRequest="250"
+                            HeightRequest="50"
+                            BackgroundColor="Red"
+                            Clicked="Delete_All_Matches_Clicked"
+                            Text="Delete All Matches"
+                            />
+                        <Entry
+                            x:Name="DeleteAllMatchesPassword"
+                            WidthRequest="500"
+                            HeightRequest="50"
+                            Margin="251, 0, 0, 0"
+                            FontSize="15"
+                            VerticalTextAlignment="Start"
+                            HorizontalTextAlignment="Start"
+                            Text=""
+                            
+                            />
+                    </AbsoluteLayout>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

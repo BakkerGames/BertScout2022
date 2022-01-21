@@ -169,7 +169,7 @@ namespace BertScout2022
                     TeamNumber.IsEnabled = false;
                     MatchNumber.IsEnabled = false;
                     ScouterName.IsEnabled = true;
-                    MenuButton.Text = "Back";
+                    MenuButton.Text = "Cancel";
                     MatchEntryBody.IsVisible = true;
                     MatchEntryView.IsVisible = true;
                     MatchMenuView.IsVisible = false;
@@ -192,6 +192,20 @@ namespace BertScout2022
             }
             _state = stateNumber;
         }
+        private async void Delete_All_Matches_Clicked(object sender, EventArgs e)
+        {
+            if (DeleteAllMatchesPassword.Text == deleteMatchPassword)
+            {
+                List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
+                foreach (TeamMatch match in deleteMatches)
+                {
+                    teamMatch = await App.Database.GetTeamMatchAsync(match.TeamNumber, match.MatchNumber);
+                    _ = await App.Database.DeleteTeamMatchAsync(teamMatch);
+                }
+                DeleteAllMatchesPassword.Text = "";
+                SetState(0);
+            }
+        }
         private void Verified_Back_Clicked(object sender, EventArgs e)
         {
             SetState(0);
@@ -200,7 +214,7 @@ namespace BertScout2022
         {
             SetState(2);
         }
-        private void Delete_Match_Clicked(object sender, EventArgs e)
+        private async void Delete_Match_Clicked(object sender, EventArgs e)
         {
             if (Delete_Match_Password.Text == deleteMatchPassword)
             {
@@ -218,6 +232,8 @@ namespace BertScout2022
                 Moved_Off_Start(0);
                 ClimbRP_Output(0);
                 CargoRP_Output(0);
+                await App.Database.DeleteTeamMatchAsync(teamMatch);
+                SetState(0);
             }
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
@@ -227,7 +243,6 @@ namespace BertScout2022
         }
         private void Moved_Off_Start(int value)
         {
-            teamMatch.LeftTarmac = value;
             Moved_Off_Start_Button.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private void Auto_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -250,7 +265,6 @@ namespace BertScout2022
         }
         private void Auto_Lower_Hub_Output(int value)
         {
-            teamMatch.AutoLowGoals = value;
             Auto_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Auto_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -273,7 +287,6 @@ namespace BertScout2022
         }
         private void Auto_Upper_Hub_Output(int value)
         {
-            teamMatch.AutoHighGoals = value;
             Auto_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Human_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -296,7 +309,6 @@ namespace BertScout2022
         }
         private void Human_Upper_Hub_Output(int value)
         {
-            teamMatch.HumanHighGoals = value;
             Human_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Human_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -319,7 +331,6 @@ namespace BertScout2022
         }
         private void Human_Lower_Hub_Output(int value)
         {
-            teamMatch.HumanLowGoals = value;
             Human_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Teleop_Upper_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -342,7 +353,6 @@ namespace BertScout2022
         }
         private void Teleop_Upper_Hub_Output(int value)
         {
-            teamMatch.TeleHighGoals = value;
             Teleop_Upper_Hub.Text = ("Upper Hub: " + value);
         }
         private void Teleop_Lower_Hub_Plus_Clicked(object sender, EventArgs e)
@@ -365,7 +375,6 @@ namespace BertScout2022
         }
         private void Teleop_Lower_Hub_Output(int value)
         {
-            teamMatch.TeleLowGoals = value;
             Teleop_Lower_Hub.Text = ("Lower Hub: " + value);
         }
         private void Climbed_None_Clicked(object sender, EventArgs e)
@@ -403,7 +412,6 @@ namespace BertScout2022
             Climbed2.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
             Climbed3.Background = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
             Climbed4.Background = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
-            teamMatch.ClimbLevel = value;
         }
         private void Won_Button_Clicked(object sender, EventArgs e)
         {
@@ -427,7 +435,6 @@ namespace BertScout2022
             WonButton.Background = (value == 2) ? SelectedButtonColor : UnselectedButtonColor;
             TiedButton.Background = (value == 1) ? SelectedButtonColor : UnselectedButtonColor;
             LostButton.Background = (value == 0) ? SelectedButtonColor : UnselectedButtonColor;
-            teamMatch.MatchRP = value;
         }
         private void Button_Rate0Box_Clicked(object sender, EventArgs e)
         {
@@ -467,7 +474,6 @@ namespace BertScout2022
             Rate3Button.BackgroundColor = (value == 3) ? SelectedButtonColor : UnselectedButtonColor;
             Rate4Button.BackgroundColor = (value == 4) ? SelectedButtonColor : UnselectedButtonColor;
             Rate5Button.BackgroundColor = (value == 5) ? SelectedButtonColor : UnselectedButtonColor;
-            teamMatch.ScouterRating = value;
         }
         private void CargoRP_Clicked(object sender, EventArgs e)
         {
@@ -476,7 +482,6 @@ namespace BertScout2022
         }
         private void CargoRP_Output(int value)
         {
-            teamMatch.CargoRP = value;
             CargoRP.Background = (teamMatch.CargoRP == 1) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private void ClimbRP_Clicked(object sender, EventArgs e)
@@ -486,7 +491,6 @@ namespace BertScout2022
         }
         private void ClimbRP_Output(int value)
         {
-            teamMatch.ClimbRP = value;
             ClimbRP.Background = (teamMatch.ClimbRP == 1) ? SelectedButtonColor : UnselectedButtonColor;
         }
         private async void Button_SendToAirtable(object sender, EventArgs e)
