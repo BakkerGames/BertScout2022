@@ -157,7 +157,7 @@ namespace BertScout2022
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
-                    MenuButton.Text = "\u25c0\u2013"; // <--
+                    MenuButton.Text = "Return"; // <-- \u25c0\u2013
                     MatchButton.IsVisible = false;
                     MatchMenuView.IsVisible = true;
                     MatchMenuView.IsEnabled = true;

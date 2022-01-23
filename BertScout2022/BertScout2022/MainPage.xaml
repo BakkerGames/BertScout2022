@@ -639,9 +639,9 @@
                             x:Name="DarkMode"
                             TextColor="#008000"
                             BackgroundColor="White"
-                            WidthRequest="200"
+                            WidthRequest="300"
                             HeightRequest="50"
-                            Text="Dark Mode"
+                            Text="Toggle Light / Dark Mode"
                             Clicked="Dark_Mode_Clicked"
                             />
                     </AbsoluteLayout>
