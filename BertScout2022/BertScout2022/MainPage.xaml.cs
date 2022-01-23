@@ -27,7 +27,7 @@ namespace BertScout2022
             }
             else if (_state == 2)
             {
-                SetState(3);
+                Back_Popup.IsVisible = true;
             }
             else
             {
@@ -179,14 +179,6 @@ namespace BertScout2022
                     Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     break;
-                case 3:
-                    Back_Popup.IsVisible = true;
-                    MatchMenuView.IsVisible = false;
-                    MatchEntryView.IsVisible = false;
-                    MatchEntryBody.IsVisible = false;
-                    Grid_Header.IsVisible = false;
-                    frame.BackgroundColor = Color.FromHex("White");
-                    break;
                 default:
                     break;
             }
@@ -204,6 +196,31 @@ namespace BertScout2022
                 }
                 DeleteAllMatchesPassword.Text = "";
                 SetState(0);
+            }
+        }
+        private void Dark_Mode_Clicked(object sender, EventArgs e)
+        {
+            if (DarkMode.BackgroundColor == Color.White)
+            {
+                DarkMode.BackgroundColor = Color.FromHex("#bfbfbf");
+                LayoutBackground.BackgroundColor = Color.Black;
+                title.TextColor = Color.Black;
+                MatchEntryView.BackgroundColor = Color.Black;
+                ScouterName.BackgroundColor = Color.FromHex("#eeeeee");
+                MatchNumber.BackgroundColor = Color.FromHex("#eeeeee");
+                TeamNumber.BackgroundColor = Color.FromHex("#eeeeee");
+                MatchMenuView.BackgroundColor = Color.Black;
+            }
+            else
+            {
+                DarkMode.BackgroundColor = Color.White;
+                LayoutBackground.BackgroundColor = Color.White;
+                MatchEntryView.BackgroundColor = Color.White;
+                title.TextColor = Color.White;
+                ScouterName.BackgroundColor = Color.White;
+                MatchNumber.BackgroundColor = Color.White;
+                TeamNumber.BackgroundColor = Color.White;
+                MatchMenuView.BackgroundColor = Color.White;
             }
         }
         private void Verified_Back_Clicked(object sender, EventArgs e)

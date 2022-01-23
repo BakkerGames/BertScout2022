@@ -9,39 +9,10 @@
 
     <ContentPage.Content>
         <StackLayout
+            x:Name="LayoutBackground"
             Orientation="Vertical"
             Margin="0"
             BackgroundColor="White">
-            <AbsoluteLayout
-                x:Name="Back_Popup"
-                IsVisible="false">
-                <Label
-                    Margin="0,90,0,0"
-                    BackgroundColor="White"
-                    TextColor="#008000"
-                    HeightRequest="9999"
-                    WidthRequest="999"
-                    FontSize="15"
-                    Text="Are you sure that you want to go back? This will clear all progress"
-                    />
-                <Button
-                    Margin="150,150,100,100"
-                    x:Name="Verified_Back"
-                    HeightRequest="50"
-                    WidthRequest="50"
-                    TextColor="Black"
-                    Text="Yes"
-                    Clicked="Verified_Back_Clicked"
-                    />
-                <Button
-                    x:Name="Cancel_Back"
-                    HeightRequest="50"
-                    WidthRequest="50"
-                    TextColor="Black"
-                    Text="No"
-                    Clicked="Cancel_Back_Clicked"
-                    />
-            </AbsoluteLayout>
             <Frame
                 x:Name="frame"
                 BackgroundColor="#008000"
@@ -62,6 +33,7 @@
                         BackgroundColor="White"
                         />
                     <Label
+                        x:Name="title"
                         Text="BERT 133 Scouting - 2022"
                         HorizontalOptions="Center"
                         TextColor="White" 
@@ -97,6 +69,7 @@
                         VerticalOptions="Start"
                         >
                         <Label       
+                            TextColor="Green"
                             Text="Team"
                             Margin="0,0,0,0"
                         />
@@ -105,10 +78,12 @@
                             WidthRequest="90"
                             HorizontalTextAlignment="End"
                             Keyboard="Numeric"
+                            TextColor="Green"
                             Text=""
                             MaxLength="4"
                         />
                         <Label 
+                            TextColor="Green"
                             Text="Match"
                             Margin="10,0,0,0"
                         />
@@ -117,16 +92,19 @@
                             WidthRequest="70"
                             Keyboard="Numeric"
                             HorizontalTextAlignment="End"
+                            TextColor="Green"
                             Text=""
                             MaxLength="3"
                         />
                         <Label
+                            TextColor="Green"
                             Text="Scouter"
                             Margin="10,0,0,0"
                         />
                         <Entry
                             x:Name="ScouterName"
                             HorizontalOptions="FillAndExpand"
+                            TextColor="Green"
                             Margin="0,0,10,0"
                         />
                     </StackLayout>
@@ -219,19 +197,16 @@
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Auto_Upper_Hub_Minus_Clicked"
                                 />
-                        </AbsoluteLayout>
-                        <StackLayout>
                             <Label
-                                Margin="0,0,10,0"
+                                Margin="0,55,10,0"
                                 BackgroundColor="Green"
                                 TextColor="White"
                                 HorizontalTextAlignment="Center"
+                                WidthRequest="560"
                                 Text="Human Goals"
                                 />
-                        </StackLayout>
-                        <AbsoluteLayout>
                             <Label
-                                Margin="51,0"
+                                Margin="51,92,0,0"
                                 Padding="0,10,0,0"
                                 x:Name="Human_Lower_Hub"
                                 BackgroundColor="#008000"
@@ -242,7 +217,7 @@
                                 Text="Lower Hub: 0"
                                 />
                             <Button
-                                Margin="202,0"
+                                Margin="202,92,0,0"
                                 Padding="0,-9,0,0"
                                 x:Name="Human_Lower_Hub_Plus"
                                 WidthRequest="50"
@@ -253,6 +228,7 @@
                                 Clicked="Human_Lower_Hub_Plus_Clicked"
                                 />
                             <Button
+                                Margin="0,92,0,0"
                                 Padding="0,-9,0,0"
                                 x:Name="Human_Lower_Hub_Minus"
                                 WidthRequest="50"
@@ -263,7 +239,7 @@
                                 Clicked="Human_Lower_Hub_Minus_Clicked"
                                 />
                             <Label
-                                Margin="360,0"
+                                Margin="360,92,0,0"
                                 Padding="0,10,0,0"
                                 x:Name="Human_Upper_Hub"
                                 BackgroundColor="#008000"
@@ -274,7 +250,7 @@
                                 Text="Upper Hub: 0"
                                 />
                             <Button
-                                Margin="511,0"
+                                Margin="511,92,0,0"
                                 Padding="0,-9,0,0"
                                 x:Name="Human_Upper_Hub_Plus"
                                 WidthRequest="50"
@@ -285,7 +261,7 @@
                                 Clicked="Human_Upper_Hub_Plus_Clicked"
                                 />
                             <Button
-                                Margin="309,0"
+                                Margin="309,92,0,0"
                                 Padding="0,-9,0,0"
                                 x:Name="Human_Upper_Hub_Minus"
                                 WidthRequest="50"
@@ -295,6 +271,62 @@
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Human_Upper_Hub_Minus_Clicked"
                                 />
+                            <Frame
+                                Margin="155,0,0,0"
+                                WidthRequest="200"
+                                HeightRequest="100"
+                                BackgroundColor="Black"
+                                CornerRadius="50"
+                                x:Name="Back_Popup"
+                                IsVisible="false"
+                                >
+                                <Frame
+                                    WidthRequest="180"
+                                    HeightRequest="90"
+                                    BackgroundColor="#008000"
+                                    CornerRadius="20"
+                                >
+                                    <AbsoluteLayout>
+                                        <Label
+                                            TextColor="#bfbfbf"
+                                            WidthRequest="140"
+                                            HorizontalTextAlignment="Center"
+                                            FontSize="20"
+                                            Text="Are you sure?"
+                                        />
+                                        <Label
+                                            WidthRequest="160"
+                                            Margin="0,30,0,0"
+                                            TextColor="#bfbfbf"
+                                            HorizontalTextAlignment="Center"
+                                            FontSize="10"
+                                            Text="This will delete all progress"
+                                        />
+                                        <Button
+                                            Margin="90,46,0,0"
+                                            x:Name="Verified_Back"
+                                            BackgroundColor="#bfbfbf"
+                                            HeightRequest="30"
+                                            WidthRequest="50"
+                                            TextColor="Black"
+                                            FontSize="15"
+                                            Text="Yes"
+                                            Clicked="Verified_Back_Clicked"
+                                            />
+                                        <Button
+                                            Margin="20,46,0,0"
+                                            x:Name="Cancel_Back"
+                                            BackgroundColor="#bfbfbf"
+                                            HeightRequest="30"
+                                            WidthRequest="50"
+                                            TextColor="Black"
+                                            FontSize="15"
+                                            Text="No"
+                                            Clicked="Cancel_Back_Clicked"
+                                            />
+                                    </AbsoluteLayout>
+                                </Frame>
+                            </Frame>
                         </AbsoluteLayout>
                         <Label
                             BackgroundColor="#008000"
@@ -381,6 +413,7 @@
                         <!--endgame fields here-->
                         <StackLayout Orientation="Horizontal">
                             <Label
+                                TextColor="Green"
                                 Text="Climbed:" 
                                 />
                             <Button
@@ -419,7 +452,6 @@
                                 Clicked="Climbed4_Clicked"
                                 />
                         </StackLayout>
-                        <!--add end game fields here-->
                         <Label
                             BackgroundColor="#007F00"
                             TextColor="White"
@@ -429,7 +461,10 @@
                         />
                         <!--add results fields here-->
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Match Result:"/>
+                            <Label 
+                                TextColor="Green"
+                                Text="Match Result:"
+                                />
                             <Button
                                 x:Name="LostButton"
                                 WidthRequest="100"
@@ -453,7 +488,10 @@
                                 />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Scouter Rating:"/>
+                            <Label
+                                TextColor="Green"
+                                Text="Scouter Rating:"
+                                />
                             <Button 
                                 x:Name="Rate0Button"
                                 WidthRequest="50"
@@ -520,6 +558,7 @@
                             <Label
                                 Margin="4,6,0,0"
                                 WidthRequest="115"
+                                TextColor="Green"
                                 Text="Comments: "
                                 />
                             <Entry
@@ -530,6 +569,8 @@
                                 FontSize="15"
                                 VerticalTextAlignment="Start"
                                 HorizontalTextAlignment="Start"
+                                TextColor="Green"
+                                BackgroundColor="#bfbfbf"
                                 Text=""
                                 />
                         </AbsoluteLayout>
@@ -550,6 +591,8 @@
                                 FontSize="20"
                                 VerticalTextAlignment="Start"
                                 HorizontalTextAlignment="Start"
+                                TextColor="Green"
+                                BackgroundColor="#bfbfbf"
                                 Text=""
                                 />
                         </AbsoluteLayout>
@@ -587,9 +630,21 @@
                             x:Name="ResultsLabel"
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="StartAndExpand"
+                            TextColor="Green"
                             Text="&lt;text here&gt;"
                         />
                     </StackLayout>
+                    <AbsoluteLayout>
+                        <Button
+                            x:Name="DarkMode"
+                            TextColor="#008000"
+                            BackgroundColor="White"
+                            WidthRequest="200"
+                            HeightRequest="50"
+                            Text="Dark Mode"
+                            Clicked="Dark_Mode_Clicked"
+                            />
+                    </AbsoluteLayout>
                     <AbsoluteLayout>
                         <Button
                             x:Name="DeleteAllMatches"
@@ -607,6 +662,7 @@
                             FontSize="15"
                             VerticalTextAlignment="Start"
                             HorizontalTextAlignment="Start"
+                            BackgroundColor="#bfbfbf"
                             Text=""
                             
                             />
