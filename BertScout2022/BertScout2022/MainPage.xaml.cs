@@ -94,6 +94,10 @@ namespace BertScout2022
                     SetState(2);
                     break;
                 case "Save":
+                    if (ScouterName.Text.ToUpper() == "DELETE")
+                    {
+                        ScouterName.Text = teamMatch.ScouterName;
+                    }
                     SaveAllFields(teamMatch);
                     _ = await App.Database.SaveTeamMatchAsync(teamMatch);
                     ClearAllFields();
