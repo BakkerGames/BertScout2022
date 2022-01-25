@@ -23,7 +23,7 @@ namespace BertScout2022
         {
             if (MenuButton.Text == "Back")
             {
-                DeleteMatch.IsVisible = false;
+                Delete_Match_Popup.IsVisible = false;
                 return;
             }
             if (_state == 0)
@@ -42,7 +42,7 @@ namespace BertScout2022
 
         private async void MatchButton_Clicked(object sender, EventArgs e)
         {
-            DeleteMatch.IsVisible = false;
+            Delete_Match_Popup.IsVisible = false;
             switch (MatchButton.Text)
             {
                 case "Start":
@@ -175,7 +175,7 @@ namespace BertScout2022
                     Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     Delete_Match_Password.Text = "";
-                    DeleteMatch.IsVisible = false;
+                    Delete_Match_Popup.IsVisible = false;
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
@@ -208,7 +208,7 @@ namespace BertScout2022
         }
         private void DeleteMatchPopup()
         {
-            DeleteMatch.IsVisible = true;
+            Delete_Match_Popup.IsVisible = true;
             ScouterName.Text = "";
             MenuButton.Text = "Back";
         }
