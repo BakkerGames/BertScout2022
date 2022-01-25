@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{83188CE2-DD3D-4F7D-8EDA-084324556CB4}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Airtable.txt = Airtable.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BertScout2022.Airtable", "BertScout2022\BertScout2022.Airtable\BertScout2022.Airtable.csproj", "{9A48BAF7-FA57-4ACF-B3D1-1DFA54282D3A}"
