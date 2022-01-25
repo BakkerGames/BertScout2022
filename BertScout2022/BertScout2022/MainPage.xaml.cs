@@ -223,7 +223,7 @@ namespace BertScout2022
                     _ = await App.Database.DeleteTeamMatchAsync(teamMatch);
                 }
                 DeleteAllMatchesPassword.Text = "";
-                SetState(0);
+                ResultsLabel.Text = "All matches deleted";
             }
         }
         private void Dark_Mode_Clicked(object sender, EventArgs e)

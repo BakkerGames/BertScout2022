@@ -623,7 +623,7 @@
                         Orientation="Horizontal"
                         HorizontalOptions="CenterAndExpand"
                         >
-                    <Button
+                        <Button
                         x:Name="SendToAirtable"
                         WidthRequest="200"
                         HeightRequest="50"
@@ -633,18 +633,6 @@
                         Text="Send to Airtable"
                         Clicked="Button_SendToAirtable"
                     />
-                </StackLayout>
-                <StackLayout 
-                    Orientation="Vertical"
-                    VerticalOptions="FillAndExpand"
-                    >
-                        <Label
-                            x:Name="ResultsLabel"
-                            HorizontalOptions="StartAndExpand"
-                            VerticalOptions="StartAndExpand"
-                            TextColor="Green"
-                            Text="&lt;text here&gt;"
-                        />
                     </StackLayout>
                     <AbsoluteLayout>
                         <Button
@@ -677,9 +665,20 @@
                             HorizontalTextAlignment="Start"
                             BackgroundColor="#bfbfbf"
                             Text=""
-                            
                             />
                     </AbsoluteLayout>
+                    <StackLayout 
+                    Orientation="Vertical"
+                    VerticalOptions="FillAndExpand"
+                    >
+                        <Label
+                            x:Name="ResultsLabel"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="StartAndExpand"
+                            TextColor="Green"
+                            Text="&lt;text here&gt;"
+                        />
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
