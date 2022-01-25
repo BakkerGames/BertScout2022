@@ -10,6 +10,7 @@ namespace BertScout2022
         private TeamMatch teamMatch;
         private int _state;
         private string deleteMatchPassword = "bert133";
+        private string deleteAllMatchesPassword = "don't tell john";
         public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         public static Color SelectedButtonColor = Color.FromHex("#008000");
 
@@ -214,7 +215,7 @@ namespace BertScout2022
         }
         private async void Delete_All_Matches_Clicked(object sender, EventArgs e)
         {
-            if (DeleteAllMatchesPassword.Text == deleteMatchPassword)
+            if (DeleteAllMatchesPassword.Text.ToLower() == deleteAllMatchesPassword)
             {
                 List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
                 foreach (TeamMatch match in deleteMatches)
@@ -224,6 +225,13 @@ namespace BertScout2022
                 }
                 DeleteAllMatchesPassword.Text = "";
                 ResultsLabel.Text = "All matches deleted";
+            } else if (DeleteAllMatchesPassword.Text.ToLower() == "hi") 
+            {
+                ResultsLabel.Text = "hi";
+            }
+            else
+            {
+                ResultsLabel.Text = "Wrong password";
             }
         }
         private void Dark_Mode_Clicked(object sender, EventArgs e)
