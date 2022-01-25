@@ -21,6 +21,11 @@ namespace BertScout2022
 
         private void MenuButton_Clicked(object sender, EventArgs e)
         {
+            if (MenuButton.Text == "Back")
+            {
+                DeleteMatch.IsVisible = false;
+                return;
+            }
             if (_state == 0)
             {
                 SetState(1);
@@ -37,6 +42,7 @@ namespace BertScout2022
 
         private async void MatchButton_Clicked(object sender, EventArgs e)
         {
+            DeleteMatch.IsVisible = false;
             switch (MatchButton.Text)
             {
                 case "Start":
@@ -57,6 +63,17 @@ namespace BertScout2022
                         return;
                     }
                     teamMatch = await App.Database.GetTeamMatchAsync(team, match);
+                    if (ScouterName.Text != null)
+                    {
+                        if (ScouterName.Text.ToUpper() == "DELETE")
+                        {
+                            if (teamMatch != null)
+                            {
+                                DeleteMatchPopup();
+                            }
+                            return;
+                        }
+                    }
                     if (teamMatch == null)
                     {
                         if (string.IsNullOrEmpty(ScouterName.Text))
@@ -154,6 +171,7 @@ namespace BertScout2022
                     Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     Delete_Match_Password.Text = "";
+                    DeleteMatch.IsVisible = false;
                     break;
                 case 1:
                     MatchEntryView.IsVisible = false;
@@ -183,6 +201,12 @@ namespace BertScout2022
                     break;
             }
             _state = stateNumber;
+        }
+        private void DeleteMatchPopup()
+        {
+            DeleteMatch.IsVisible = true;
+            ScouterName.Text = "";
+            MenuButton.Text = "Back";
         }
         private async void Delete_All_Matches_Clicked(object sender, EventArgs e)
         {
