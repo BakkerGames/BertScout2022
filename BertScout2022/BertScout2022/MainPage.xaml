@@ -108,6 +108,40 @@
                             Margin="0,0,10,0"
                         />
                     </StackLayout>
+                    <AbsoluteLayout
+                            x:Name="DeleteMatch"
+                            IsVisible="false"
+                            >
+                        <Frame
+                                CornerRadius="30"
+                                BorderColor="#008000"
+                                BackgroundColor="#bfbfbf"
+                                >
+                            <AbsoluteLayout>
+                                <Button
+                                x:Name="Delete_Match"
+                                BackgroundColor="Red"
+                                WidthRequest="200"
+                                HeightRequest="50"
+                                Text="Delete Match"
+                                Clicked="Delete_Match_Clicked"
+                                />
+                                <Entry
+                                x:Name="Delete_Match_Password"
+                                Margin="210,0,10,0"
+                                WidthRequest="302"
+                                HeightRequest="50"
+                                FontSize="20"
+                                    IsPassword="True"
+                                VerticalTextAlignment="Start"
+                                HorizontalTextAlignment="Start"
+                                TextColor="Green"
+                                BackgroundColor="#bfbfbf"
+                                Text=""
+                                />
+                            </AbsoluteLayout>
+                        </Frame>
+                    </AbsoluteLayout>
                     <StackLayout
                         x:Name="MatchEntryBody"
                         Orientation="Vertical"
@@ -574,28 +608,6 @@
                                 Text=""
                                 />
                         </AbsoluteLayout>
-                        <AbsoluteLayout>
-                            <Button
-                                x:Name="Delete_Match"
-                                BackgroundColor="Red"
-                                WidthRequest="200"
-                                HeightRequest="50"
-                                Text="Delete Match"
-                                Clicked="Delete_Match_Clicked"
-                                />
-                            <Entry
-                                x:Name="Delete_Match_Password"
-                                Margin="210,0,10,0"
-                                WidthRequest="351"
-                                HeightRequest="50"
-                                FontSize="20"
-                                VerticalTextAlignment="Start"
-                                HorizontalTextAlignment="Start"
-                                TextColor="Green"
-                                BackgroundColor="#bfbfbf"
-                                Text=""
-                                />
-                        </AbsoluteLayout>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
@@ -660,6 +672,7 @@
                             HeightRequest="50"
                             Margin="251, 0, 0, 0"
                             FontSize="15"
+                            IsPassword="True"
                             VerticalTextAlignment="Start"
                             HorizontalTextAlignment="Start"
                             BackgroundColor="#bfbfbf"
