@@ -3,6 +3,7 @@ using BertScout2022.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BertScout2022.Airtable
@@ -12,8 +13,9 @@ namespace BertScout2022.Airtable
         private const string AIRTABLE_BASE = "appSYiC3Jj92HrBBS";
         private const string AIRTABLE_KEY = "keyIlZIGEOtUMLKSY";
 
-        public static async Task AirtableSendRecords(List<TeamMatch> matches)
+        public static async Task<string> AirtableSendRecords(List<TeamMatch> matches)
         {
+            StringBuilder result = new StringBuilder();
             int NewCount = 0;
             int UpdatedCount = 0;
             List<Fields> newRecordList = new List<Fields>();
@@ -67,7 +69,8 @@ namespace BertScout2022.Airtable
                     int tempCount = await AirtableSendNewRecords(airtableBase, newRecordList, matches);
                     if (tempCount < 0)
                     {
-                        return; // error, exit out
+                        result.AppendLine("Error!");
+                        return result.ToString(); // error, exit out
                     }
                     NewCount += tempCount;
                 }
@@ -76,11 +79,16 @@ namespace BertScout2022.Airtable
                     int tempCount = await AirtableSendUpdatedRecords(airtableBase, updatedRecordList);
                     if (tempCount < 0)
                     {
-                        return; // error, exit out
+                        result.AppendLine("Error!");
+                        return result.ToString(); // error, exit out
                     }
                     UpdatedCount += tempCount;
                 }
             }
+            if (NewCount > 0) result.AppendLine($"Records added to Airtable: {NewCount}");
+            if (UpdatedCount > 0) result.AppendLine($"Records updated on Airtable: {UpdatedCount}");
+            if (NewCount + UpdatedCount == 0) result.AppendLine("No changes, nothing sent to Airtable");
+            return result.ToString();
         }
 
         private static async Task<int> AirtableSendNewRecords(AirtableBase airtableBase,
