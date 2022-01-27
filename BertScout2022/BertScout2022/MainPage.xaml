@@ -575,7 +575,7 @@
                                 BackgroundColor="#bfbfbf"
                                 WidthRequest="250"
                                 HeightRequest="50"
-                                Text="CargoRP"
+                                Text="Cargo RP"
                                 Clicked="CargoRP_Clicked"
                                 />
                             <Button
@@ -584,7 +584,7 @@
                                 BackgroundColor="#bfbfbf"
                                 WidthRequest="250"
                                 HeightRequest="50"
-                                Text="ClimbRP"
+                                Text="Climb RP"
                                 Clicked="ClimbRP_Clicked"
                                 />
                         </AbsoluteLayout>
