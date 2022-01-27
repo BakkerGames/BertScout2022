@@ -95,12 +95,19 @@ namespace BertScout2022
                     SetState(2);
                     break;
                 case "Save":
-                    if (ScouterName.Text.ToUpper() == "DELETE")
+                    if (ScouterName.Text == null || ScouterName.Text.ToUpper() == "DELETE")
                     {
                         ScouterName.Text = teamMatch.ScouterName;
                     }
                     SaveAllFields(teamMatch);
-                    _ = await App.Database.SaveTeamMatchAsync(teamMatch);
+                    try
+                    {
+                        _ = await App.Database.SaveTeamMatchAsync(teamMatch);
+                    }
+                    catch (Exception)
+                    {
+                        //todo add error message
+                    }
                     ClearAllFields();
                     SetState(0);
                     break;
@@ -225,7 +232,8 @@ namespace BertScout2022
                 }
                 DeleteAllMatchesPassword.Text = "";
                 ResultsLabel.Text = "All matches deleted";
-            } else if (DeleteAllMatchesPassword.Text.ToLower() == "hi") 
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "hi")
             {
                 ResultsLabel.Text = "hi";
             }
