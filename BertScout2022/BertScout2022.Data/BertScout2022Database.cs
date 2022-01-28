@@ -67,7 +67,8 @@ namespace BertScout2022.Data
                 TeamMatch existingItem = await GetTeamMatchAsync(item.TeamNumber, item.MatchNumber);
                 if (existingItem != null)
                 {
-                    throw new Exception($"Item already exists - team={item.TeamNumber}, match={item.MatchNumber}");
+                    // this item is bad, probably doesn't have a UUID
+                    await _database.DeleteAsync(existingItem);
                 }
                 item.Uuid = Guid.NewGuid().ToString();
             }
