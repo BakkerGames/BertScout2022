@@ -12,6 +12,8 @@ namespace BertScout2022
         private string deleteMatchPassword = "bert133";
         private string deleteAllMatchesPassword = "don't tell john";
         Boolean greenMode = false;
+        Boolean darkGreenMode = false;
+        Boolean darkMode = false;
         public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         public static Color SelectedButtonColor = Color.FromHex("#008000");
 
@@ -238,28 +240,7 @@ namespace BertScout2022
                 ResultsLabel.Text = "hi";
             } else if (DeleteAllMatchesPassword.Text.ToLower() == "massimo")
             {
-                greenMode = !greenMode;
-                if (greenMode)
-                {
-                    LayoutBackground.BackgroundColor = Color.DarkGreen;
-                    MatchEntryView.BackgroundColor = Color.DarkGreen;
-                    title.TextColor = Color.LightGreen;
-                    ScouterName.BackgroundColor = Color.LightGreen;
-                    MatchNumber.BackgroundColor = Color.LightGreen;
-                    TeamNumber.BackgroundColor = Color.LightGreen;
-                    MatchMenuView.BackgroundColor = Color.DarkGreen;
-                    ResultsLabel.Text = "Disclaimer: Green Mode was Massimo's idea";
-                }
-                else
-                {
-                    LayoutBackground.BackgroundColor = Color.White;
-                    MatchEntryView.BackgroundColor = Color.White;
-                    title.TextColor = Color.White;
-                    ScouterName.BackgroundColor = Color.White;
-                    MatchNumber.BackgroundColor = Color.White;
-                    TeamNumber.BackgroundColor = Color.White;
-                    MatchMenuView.BackgroundColor = Color.White;
-                }
+                Green_Mode();
             }
             else
             {
@@ -267,11 +248,59 @@ namespace BertScout2022
             }
             DeleteAllMatchesPassword.Text = "";
         }
+        private void Green_Mode()
+        {
+            greenMode = !greenMode;
+            if (greenMode)
+            {
+                darkGreenMode = darkMode;
+                if (!darkGreenMode)
+                {
+                    frame.BackgroundColor = Color.FromHex("#008000");
+                    LayoutBackground.BackgroundColor = Color.DarkGreen;
+                    MatchEntryView.BackgroundColor = Color.DarkGreen;
+                    title.TextColor = Color.LightGreen;
+                    ScouterName.BackgroundColor = Color.LightGreen;
+                    MatchNumber.BackgroundColor = Color.LightGreen;
+                    TeamNumber.BackgroundColor = Color.LightGreen;
+                    MatchMenuView.BackgroundColor = Color.DarkGreen;
+                    ResultsLabel.Text = "Disclaimer: (dark)Green Mode was Massimo's idea";
+                }
+                else
+                {
+                    frame.BackgroundColor = Color.FromHex("#990099");
+                    LayoutBackground.BackgroundColor = Color.FromHex("#220022");
+                    MatchEntryView.BackgroundColor = Color.FromHex("#220022");
+                    title.TextColor = Color.FromHex("#dd00dd");
+                    ScouterName.BackgroundColor = Color.FromHex("#dd00dd");
+                    MatchNumber.BackgroundColor = Color.FromHex("#dd00dd");
+                    TeamNumber.BackgroundColor = Color.FromHex("#dd00dd");
+                    MatchMenuView.BackgroundColor = Color.FromHex("#220022");
+                    ResultsLabel.Text = "Disclaimer: Green Mode was Massimo's idea";
+                }
+            }
+            else
+            {
+                LayoutBackground.BackgroundColor = Color.White;
+                MatchEntryView.BackgroundColor = Color.White;
+                title.TextColor = Color.White;
+                ScouterName.BackgroundColor = Color.White;
+                MatchNumber.BackgroundColor = Color.White;
+                TeamNumber.BackgroundColor = Color.White;
+                MatchMenuView.BackgroundColor = Color.White;
+            }
+        }
         private void Dark_Mode_Clicked(object sender, EventArgs e)
         {
-            greenMode = false;
-            if (DarkMode.BackgroundColor == Color.White)
+            darkMode = !darkMode;
+            if (greenMode)
             {
+                greenMode = false;
+                Green_Mode();
+            }
+            if (darkMode)
+            {
+                frame.BackgroundColor = Color.FromHex("#008000");
                 DarkMode.BackgroundColor = Color.FromHex("#bfbfbf");
                 LayoutBackground.BackgroundColor = Color.Black;
                 title.TextColor = Color.Black;
@@ -283,6 +312,7 @@ namespace BertScout2022
             }
             else
             {
+                frame.BackgroundColor = Color.FromHex("#008000");
                 DarkMode.BackgroundColor = Color.White;
                 LayoutBackground.BackgroundColor = Color.White;
                 MatchEntryView.BackgroundColor = Color.White;
