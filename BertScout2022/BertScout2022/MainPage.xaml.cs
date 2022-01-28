@@ -11,6 +11,7 @@ namespace BertScout2022
         private int _state;
         private string deleteMatchPassword = "bert133";
         private string deleteAllMatchesPassword = "don't tell john";
+        Boolean greenMode = false;
         public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         public static Color SelectedButtonColor = Color.FromHex("#008000");
 
@@ -223,19 +224,44 @@ namespace BertScout2022
                     teamMatch = await App.Database.GetTeamMatchAsync(match.TeamNumber, match.MatchNumber);
                     _ = await App.Database.DeleteTeamMatchAsync(teamMatch);
                 }
-                DeleteAllMatchesPassword.Text = "";
                 ResultsLabel.Text = "All matches deleted";
             } else if (DeleteAllMatchesPassword.Text.ToLower() == "hi") 
             {
                 ResultsLabel.Text = "hi";
+            } else if (DeleteAllMatchesPassword.Text.ToLower() == "massimo")
+            {
+                greenMode = !greenMode;
+                if (greenMode)
+                {
+                    LayoutBackground.BackgroundColor = Color.DarkGreen;
+                    MatchEntryView.BackgroundColor = Color.DarkGreen;
+                    title.TextColor = Color.LightGreen;
+                    ScouterName.BackgroundColor = Color.LightGreen;
+                    MatchNumber.BackgroundColor = Color.LightGreen;
+                    TeamNumber.BackgroundColor = Color.LightGreen;
+                    MatchMenuView.BackgroundColor = Color.DarkGreen;
+                    ResultsLabel.Text = "Disclaimer: Green Mode was Massimo's idea";
+                }
+                else
+                {
+                    LayoutBackground.BackgroundColor = Color.White;
+                    MatchEntryView.BackgroundColor = Color.White;
+                    title.TextColor = Color.White;
+                    ScouterName.BackgroundColor = Color.White;
+                    MatchNumber.BackgroundColor = Color.White;
+                    TeamNumber.BackgroundColor = Color.White;
+                    MatchMenuView.BackgroundColor = Color.White;
+                }
             }
             else
             {
                 ResultsLabel.Text = "Wrong password";
             }
+            DeleteAllMatchesPassword.Text = "";
         }
         private void Dark_Mode_Clicked(object sender, EventArgs e)
         {
+            greenMode = false;
             if (DarkMode.BackgroundColor == Color.White)
             {
                 DarkMode.BackgroundColor = Color.FromHex("#bfbfbf");

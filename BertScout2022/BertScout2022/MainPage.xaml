@@ -656,7 +656,7 @@
                             />
                         <Entry
                             x:Name="DeleteAllMatchesPassword"
-                            WidthRequest="500"
+                            WidthRequest="308"
                             HeightRequest="50"
                             Margin="251, 0, 0, 0"
                             FontSize="15"
