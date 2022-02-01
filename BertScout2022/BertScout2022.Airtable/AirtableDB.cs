@@ -114,6 +114,7 @@ namespace BertScout2022.Airtable
                 {
                     foreach (TeamMatch match in matches)
                     {
+                        if (match.Uuid == null) continue;
                         if (match.Uuid == rec.GetField("Uuid")?.ToString())
                         {
                             match.AirtableId = rec.Id;
