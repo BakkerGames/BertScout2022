@@ -27,6 +27,7 @@ namespace BertScout2022.Airtable
             {
                 foreach (TeamMatch match in matches)
                 {
+                    if (match.Uuid == null) continue;
                     if (string.IsNullOrEmpty(match.AirtableId))
                     {
                         Fields fields = new Fields();
@@ -43,7 +44,6 @@ namespace BertScout2022.Airtable
                             fields.AddField(name, fi.GetValue(match));
                         }
                         newRecordList.Add(fields);
-                        NewCount++;
                     }
                     else if (match.Changed)
                     {
@@ -61,7 +61,6 @@ namespace BertScout2022.Airtable
                             idFields.AddField(name, fi.GetValue(match));
                         }
                         updatedRecordList.Add(idFields);
-                        UpdatedCount++;
                     }
                 }
                 if (newRecordList.Count > 0)
@@ -115,7 +114,8 @@ namespace BertScout2022.Airtable
                 {
                     foreach (TeamMatch match in matches)
                     {
-                        if (match.Uuid == rec.GetField("Uuid").ToString())
+                        if (match.Uuid == null) continue;
+                        if (match.Uuid == rec.GetField("Uuid")?.ToString())
                         {
                             match.AirtableId = rec.Id;
                             finalCount++;
