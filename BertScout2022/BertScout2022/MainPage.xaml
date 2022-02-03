@@ -162,7 +162,7 @@
                                 Text="Moved Off Tarmac"
                                 BackgroundColor="#bfbfbf"
                                 Clicked="Moved_Off_Start_Clicked"
-                                Margin="0,0,10,0"
+                                Margin="80,0,90,0"
                                 />
                         </StackLayout>
                         <AbsoluteLayout>
@@ -521,6 +521,25 @@
                                 Clicked="Won_Button_Clicked"
                                 />
                         </StackLayout>
+                        <AbsoluteLayout>
+                            <Button
+                                x:Name="CargoRP"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="Cargo RP"
+                                Clicked="CargoRP_Clicked"
+                                />
+                            <Button
+                                x:Name="ClimbRP"
+                                TranslationX="311"
+                                BackgroundColor="#bfbfbf"
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                Text="Climb RP"
+                                Clicked="ClimbRP_Clicked"
+                                />
+                        </AbsoluteLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label
                                 TextColor="Green"
@@ -569,25 +588,6 @@
                                 Clicked="Button_Rate5Box_Clicked"
                                 />
                         </StackLayout>
-                        <AbsoluteLayout>
-                            <Button
-                                x:Name="CargoRP"
-                                BackgroundColor="#bfbfbf"
-                                WidthRequest="250"
-                                HeightRequest="50"
-                                Text="Cargo RP"
-                                Clicked="CargoRP_Clicked"
-                                />
-                            <Button
-                                x:Name="ClimbRP"
-                                TranslationX="311"
-                                BackgroundColor="#bfbfbf"
-                                WidthRequest="250"
-                                HeightRequest="50"
-                                Text="Climb RP"
-                                Clicked="ClimbRP_Clicked"
-                                />
-                        </AbsoluteLayout>
                         <AbsoluteLayout>
                             <Label
                                 Margin="4,6,0,0"
