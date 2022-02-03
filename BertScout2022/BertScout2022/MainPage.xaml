@@ -624,6 +624,21 @@
                         HorizontalOptions="CenterAndExpand"
                         >
                         <Button
+                        x:Name="ShowMatches"
+                        WidthRequest="200"
+                        HeightRequest="50"
+                        TextColor="Black"
+                        BackgroundColor="#808080"
+                        HorizontalOptions="Center"
+                        Text="Show All Matches"
+                        Clicked="Button_ShowMatches"
+                    />
+                    </StackLayout>
+                    <StackLayout 
+                        Orientation="Horizontal"
+                        HorizontalOptions="CenterAndExpand"
+                        >
+                        <Button
                         x:Name="SendToAirtable"
                         WidthRequest="200"
                         HeightRequest="50"
@@ -677,6 +692,8 @@
                             VerticalOptions="StartAndExpand"
                             TextColor="Green"
                             Text="&lt;text here&gt;"
+                            FontFamily="Consolas"
+                            FontSize="20"
                         />
                     </StackLayout>
                 </StackLayout>

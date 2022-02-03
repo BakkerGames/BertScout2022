@@ -3,6 +3,8 @@ using BertScout2022.Airtable;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Text;
+
 namespace BertScout2022
 {
     public partial class MainPage : ContentPage
@@ -629,6 +631,23 @@ namespace BertScout2022
                 match.Changed = false;
                 await App.Database.SaveTeamMatchAsync(match);
             }
+        }
+
+        private async void Button_ShowMatches(object sender, EventArgs e)
+        {
+            StringBuilder result = new StringBuilder();
+            List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+            SortedList<string, TeamMatch> sorted = new SortedList<string, TeamMatch>();
+            foreach (TeamMatch match in matches)
+            {
+                sorted.Add($"{match.MatchNumber:000}-{match.TeamNumber:0000}", match);
+            }
+            foreach (TeamMatch match in sorted.Values)
+            {
+                string sent = match.AirtableId == null ? "" : "* ";
+                result.AppendLine($"{sent}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
+            }
+            ResultsLabel.Text = result.ToString();
         }
     }
 }
