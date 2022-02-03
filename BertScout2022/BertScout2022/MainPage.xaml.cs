@@ -171,6 +171,8 @@ namespace BertScout2022
             switch (stateNumber)
             {
                 case 0:
+                    MatchEntryHeader.IsVisible = true;
+                    MatchEntryHeader.IsEnabled = true;
                     MenuButton.Text = "Menu";
                     MenuButton.IsVisible = true;
                     MatchButton.Text = "Start";
@@ -190,6 +192,8 @@ namespace BertScout2022
                     Delete_Match_Popup.IsVisible = false;
                     break;
                 case 1:
+                    MatchEntryHeader.IsVisible = false;
+                    MatchEntryHeader.IsEnabled = false;
                     MatchEntryView.IsVisible = false;
                     MenuButton.Text = "Return"; // <-- \u25c0\u2013
                     MatchButton.IsVisible = false;
@@ -199,6 +203,8 @@ namespace BertScout2022
                     frame.BackgroundColor = Color.FromHex("#008000");
                     break;
                 case 2:
+                    MatchEntryHeader.IsVisible = true;
+                    MatchEntryHeader.IsEnabled = true;
                     TeamNumber.IsEnabled = false;
                     MatchNumber.IsEnabled = false;
                     ScouterName.IsEnabled = true;
@@ -237,7 +243,8 @@ namespace BertScout2022
             else if (DeleteAllMatchesPassword.Text.ToLower() == "hi")
             {
                 ResultsLabel.Text = "hi";
-            } else if (DeleteAllMatchesPassword.Text.ToLower() == "massimo")
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "massimo")
             {
                 Green_Mode();
             }
@@ -619,7 +626,7 @@ namespace BertScout2022
             }
             catch (Exception ex)
             {
-                ResultsLabel.Text = ex.Message + "\n" + ex.InnerException.Message;
+                ResultsLabel.Text = ex.Message + "\n" + ex?.InnerException?.Message;
                 return;
             }
             ResultsLabel.Text = result; // show everything sent

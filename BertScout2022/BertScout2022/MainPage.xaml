@@ -651,13 +651,16 @@
                         Clicked="Button_SendToAirtable"
                     />
                     </StackLayout>
-                    <AbsoluteLayout>
+                    <AbsoluteLayout
+                        HorizontalOptions="CenterAndExpand"
+                        >
                         <Button
                             x:Name="DarkMode"
                             TextColor="#008000"
                             BackgroundColor="White"
                             WidthRequest="300"
                             HeightRequest="50"
+                            HorizontalOptions="Center"
                             Text="Toggle Light / Dark Mode"
                             Clicked="Dark_Mode_Clicked"
                             />
@@ -693,7 +696,7 @@
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="StartAndExpand"
                             TextColor="Green"
-                            Text="&lt;text here&gt;"
+                            Text=""
                             FontFamily="Consolas"
                             FontSize="20"
                         />
