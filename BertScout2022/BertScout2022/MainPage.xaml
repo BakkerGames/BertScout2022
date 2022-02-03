@@ -19,6 +19,7 @@
                 Margin="0,0,20,0"
                 Padding="10,4,10,4"
                 CornerRadius="0"
+                MinimumHeightRequest="50"
                 >
                 <Grid
                     x:Name="Grid_Header">
@@ -53,6 +54,52 @@
                         />
                 </Grid>
             </Frame>
+            <StackLayout
+                        x:Name="MatchEntryHeader"
+                        IsEnabled="True"
+                        Orientation="Horizontal"
+                        VerticalOptions="Start"
+                        >
+                <Label       
+                            TextColor="Green"
+                            Text="Team"
+                            Margin="0,0,0,0"
+                        />
+                <Entry
+                            x:Name="TeamNumber"
+                            WidthRequest="90"
+                            HorizontalTextAlignment="End"
+                            Keyboard="Numeric"
+                            TextColor="Green"
+                            Text=""
+                            MaxLength="4"
+                        />
+                <Label 
+                            TextColor="Green"
+                            Text="Match"
+                            Margin="10,0,0,0"
+                        />
+                <Entry
+                            x:Name="MatchNumber"
+                            WidthRequest="70"
+                            Keyboard="Numeric"
+                            HorizontalTextAlignment="End"
+                            TextColor="Green"
+                            Text=""
+                            MaxLength="3"
+                        />
+                <Label
+                            TextColor="Green"
+                            Text="Scouter"
+                            Margin="10,0,0,0"
+                        />
+                <Entry
+                            x:Name="ScouterName"
+                            HorizontalOptions="FillAndExpand"
+                            TextColor="Green"
+                            Margin="0,0,10,0"
+                        />
+            </StackLayout>
             <ScrollView
                 x:Name="MatchEntryView"
                 IsVisible="True"
@@ -62,52 +109,6 @@
                 Margin="0"
                 Padding="10,0,0,10">
                 <StackLayout Orientation="Vertical">
-                    <StackLayout
-                        x:Name="MatchEntryHeader"
-                        IsEnabled="True"
-                        Orientation="Horizontal"
-                        VerticalOptions="Start"
-                        >
-                        <Label       
-                            TextColor="Green"
-                            Text="Team"
-                            Margin="0,0,0,0"
-                        />
-                        <Entry
-                            x:Name="TeamNumber"
-                            WidthRequest="90"
-                            HorizontalTextAlignment="End"
-                            Keyboard="Numeric"
-                            TextColor="Green"
-                            Text=""
-                            MaxLength="4"
-                        />
-                        <Label 
-                            TextColor="Green"
-                            Text="Match"
-                            Margin="10,0,0,0"
-                        />
-                        <Entry
-                            x:Name="MatchNumber"
-                            WidthRequest="70"
-                            Keyboard="Numeric"
-                            HorizontalTextAlignment="End"
-                            TextColor="Green"
-                            Text=""
-                            MaxLength="3"
-                        />
-                        <Label
-                            TextColor="Green"
-                            Text="Scouter"
-                            Margin="10,0,0,0"
-                        />
-                        <Entry
-                            x:Name="ScouterName"
-                            HorizontalOptions="FillAndExpand"
-                            TextColor="Green"
-                            Margin="0,0,10,0"
-                        />
-                    </StackLayout>
                     <AbsoluteLayout
                             x:Name="Delete_Match_Popup"
                             IsVisible="false"
@@ -323,6 +324,7 @@
                                     <AbsoluteLayout>
                                         <Label
                                             TextColor="#bfbfbf"
+                                            Margin="10,-20,0,0"
                                             WidthRequest="140"
                                             HorizontalTextAlignment="Center"
                                             FontSize="20"
@@ -330,32 +332,32 @@
                                         />
                                         <Label
                                             WidthRequest="160"
-                                            Margin="0,30,0,0"
+                                            Margin="0,10,0,0"
                                             TextColor="#bfbfbf"
                                             HorizontalTextAlignment="Center"
-                                            FontSize="10"
+                                            FontSize="15"
                                             Text="This will delete all progress"
                                         />
                                         <Button
-                                            Margin="90,46,0,0"
+                                            Margin="115,27,0,0"
                                             x:Name="Verified_Back"
                                             BackgroundColor="#bfbfbf"
-                                            HeightRequest="30"
-                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            WidthRequest="40"
                                             TextColor="Black"
                                             FontSize="15"
-                                            Text="Yes"
+                                            Text="Y"
                                             Clicked="Verified_Back_Clicked"
                                             />
                                         <Button
-                                            Margin="20,46,0,0"
+                                            Margin="5,27,0,0"
                                             x:Name="Cancel_Back"
                                             BackgroundColor="#bfbfbf"
-                                            HeightRequest="30"
-                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            WidthRequest="40"
                                             TextColor="Black"
                                             FontSize="15"
-                                            Text="No"
+                                            Text="N"
                                             Clicked="Cancel_Back_Clicked"
                                             />
                                     </AbsoluteLayout>

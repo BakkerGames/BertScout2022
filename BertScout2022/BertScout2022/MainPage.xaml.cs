@@ -183,7 +183,6 @@ namespace BertScout2022
                     MatchMenuView.IsVisible = false;
                     MatchMenuView.IsEnabled = false;
                     Back_Popup.IsVisible = false;
-                    Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     Delete_Match_Password.Text = "";
                     Delete_Match_Popup.IsVisible = false;
@@ -195,7 +194,6 @@ namespace BertScout2022
                     MatchMenuView.IsVisible = true;
                     MatchMenuView.IsEnabled = true;
                     Back_Popup.IsVisible = false;
-                    Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     break;
                 case 2:
@@ -209,7 +207,6 @@ namespace BertScout2022
                     MatchMenuView.IsEnabled = false;
                     MatchButton.Text = "Save";
                     Back_Popup.IsVisible = false;
-                    Grid_Header.IsVisible = true;
                     frame.BackgroundColor = Color.FromHex("#008000");
                     break;
                 default:
