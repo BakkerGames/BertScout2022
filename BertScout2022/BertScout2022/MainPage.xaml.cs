@@ -641,7 +641,7 @@ namespace BertScout2022
             }
             foreach (TeamMatch match in sorted.Values)
             {
-                string sent = match.AirtableId == null ? "" : "* ";
+                string sent = match.AirtableId == null ? "  " : "* ";
                 result.AppendLine($"{sent}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
             }
             ResultsLabel.Text = result.ToString();
