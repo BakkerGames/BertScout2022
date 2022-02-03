@@ -1,0 +1,5 @@
+TotalScore
+(LeftTarmac * 2) + (AutoHighGoals * 4) + (HumanHighGoals * 4) + (AutoLowGoals * 2) + (HumanLowGoals * 2) + (TeleHighGoals * 2) + TeleLowGoals + SWITCH(ClimbLevel, 4, 15, 3, 10, 2, 6, 1, 4, 0)
+
+TotalRP
+MatchRP + CargoRP + ClimbRP

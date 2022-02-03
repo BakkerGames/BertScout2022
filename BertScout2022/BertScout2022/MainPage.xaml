@@ -597,14 +597,12 @@
                                 TextColor="Green"
                                 Text="Comments: "
                                 />
-                            <Entry
+                            <Editor
                                 x:Name="Comments"
                                 Margin="130,0,10,0"
                                 WidthRequest="431"
-                                HeightRequest="50"
-                                FontSize="15"
-                                VerticalTextAlignment="Start"
-                                HorizontalTextAlignment="Start"
+                                HeightRequest="100"
+                                FontSize="Medium"
                                 TextColor="Green"
                                 BackgroundColor="#bfbfbf"
                                 Text=""
@@ -672,16 +670,16 @@
                             HeightRequest="50"
                             BackgroundColor="Red"
                             Clicked="Delete_All_Matches_Clicked"
-                            Text="Delete All Matches"
+                            Text="Enter secret password"
                             />
                         <Entry
                             x:Name="DeleteAllMatchesPassword"
                             WidthRequest="308"
                             HeightRequest="50"
                             Margin="251, 0, 0, 0"
-                            FontSize="15"
+                            FontSize="Medium"
                             IsPassword="True"
-                            VerticalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Start"
                             BackgroundColor="#bfbfbf"
                             Text=""

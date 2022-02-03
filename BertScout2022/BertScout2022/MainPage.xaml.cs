@@ -156,14 +156,14 @@ namespace BertScout2022
             CargoRP_Output(teamMatch.CargoRP);
         }
 
-        private void SaveAllFields(TeamMatch item)
+        private void SaveAllFields(TeamMatch match)
         {
             if (!string.IsNullOrWhiteSpace(ScouterName.Text))
             {
-                item.ScouterName = ScouterName.Text;
+                match.ScouterName = ScouterName.Text;
             }
-            item.Comments = Comments.Text;
-            item.Changed = true;
+            match.Comments = Comments.Text;
+            match.Changed = true;
         }
 
         private void SetState(int stateNumber)
@@ -195,7 +195,7 @@ namespace BertScout2022
                     MatchEntryHeader.IsVisible = false;
                     MatchEntryHeader.IsEnabled = false;
                     MatchEntryView.IsVisible = false;
-                    MenuButton.Text = "Return"; // <-- \u25c0\u2013
+                    MenuButton.Text = "Return";
                     MatchButton.IsVisible = false;
                     MatchMenuView.IsVisible = true;
                     MatchMenuView.IsEnabled = true;
@@ -235,10 +235,20 @@ namespace BertScout2022
                 List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
                 foreach (TeamMatch match in deleteMatches)
                 {
-                    teamMatch = await App.Database.GetTeamMatchAsync(match.TeamNumber, match.MatchNumber);
-                    _ = await App.Database.DeleteTeamMatchAsync(teamMatch);
+                    await App.Database.DeleteTeamMatchAsync(match);
                 }
                 ResultsLabel.Text = "All matches deleted";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "reset")
+            {
+                List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+                foreach (TeamMatch match in matches)
+                {
+                    match.AirtableId = null;
+                    match.Changed = false;
+                    await App.Database.SaveTeamMatchAsync(match);
+                }
+                ResultsLabel.Text = "All AirtableIds cleared";
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "hi")
             {
@@ -648,8 +658,12 @@ namespace BertScout2022
             }
             foreach (TeamMatch match in sorted.Values)
             {
-                string sent = match.AirtableId == null ? "  " : "* ";
-                result.AppendLine($"{sent}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
+                string sentFlag = "  ";
+                if (!string.IsNullOrEmpty(match.AirtableId))
+                {
+                    sentFlag = match.Changed ? "- " : "* ";
+                }
+                result.AppendLine($"{sentFlag}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
             }
             ResultsLabel.Text = result.ToString();
         }
