@@ -30,6 +30,7 @@ namespace BertScout2022
             if (MenuButton.Text == "Back")
             {
                 Delete_Match_Popup.IsVisible = false;
+                SetState(0);
                 return;
             }
             if (_state == 0)
@@ -257,6 +258,11 @@ namespace BertScout2022
             else if (DeleteAllMatchesPassword.Text.ToLower() == "massimo")
             {
                 Green_Mode();
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "nft")
+            {
+                int zero = 0;
+                zero = (1 / zero);
             }
             else
             {
@@ -649,12 +655,14 @@ namespace BertScout2022
 
         private async void Button_ShowMatches(object sender, EventArgs e)
         {
+            bool isTeamMatchNull = true;
             StringBuilder result = new StringBuilder();
             List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
             SortedList<string, TeamMatch> sorted = new SortedList<string, TeamMatch>();
             foreach (TeamMatch match in matches)
             {
                 sorted.Add($"{match.MatchNumber:000}-{match.TeamNumber:0000}", match);
+                isTeamMatchNull = false;
             }
             foreach (TeamMatch match in sorted.Values)
             {
@@ -666,6 +674,10 @@ namespace BertScout2022
                 result.AppendLine($"{sentFlag}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
             }
             ResultsLabel.Text = result.ToString();
+            if (isTeamMatchNull)
+            {
+                ResultsLabel.Text = "No matches in database";
+            }
         }
     }
 }

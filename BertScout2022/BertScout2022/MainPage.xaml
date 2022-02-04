@@ -545,7 +545,7 @@
                         <StackLayout Orientation="Horizontal">
                             <Label
                                 TextColor="Green"
-                                Text="Scouter Rating:"
+                                Text="Rating:"
                                 />
                             <Button 
                                 x:Name="Rate0Button"
@@ -699,6 +699,10 @@
                             FontSize="20"
                         />
                     </StackLayout>
+                    <Label
+                            TextColor="Green"
+                            Text="Made by: Finn, Scott, and Keith"
+                            />
                 </StackLayout>
             </ScrollView>
         </StackLayout>
