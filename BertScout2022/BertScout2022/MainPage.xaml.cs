@@ -202,6 +202,23 @@ namespace BertScout2022
                     MatchMenuView.IsEnabled = true;
                     Back_Popup.IsVisible = false;
                     frame.BackgroundColor = Color.FromHex("#008000");
+                    ResultsLabel.Text = "";
+                    if (ScouterName.Text != null){
+                        switch (ScouterName.Text.ToLower()) {
+                            case "scott":
+                                credits.Text = "Made by: Finn, Keith, and I";
+                                break;
+                            case "finn":
+                                credits.Text = "Made by: Scott, Keith, and I";
+                                break;
+                            case "keith":
+                                credits.Text = "Made by: Finn, Scott, and I";
+                                break;
+                            default:
+                                credits.Text = "Made by: Finn, Scott, and Keith";
+                                break;
+                        }
+                    }
                     break;
                 case 2:
                     MatchEntryHeader.IsVisible = true;
@@ -263,6 +280,37 @@ namespace BertScout2022
             {
                 int zero = 0;
                 zero = (1 / zero);
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower().StartsWith("random"))
+            {
+                int randLength = 0;
+                if (int.TryParse(DeleteAllMatchesPassword.Text.ToLower().Substring(6).Trim(), out randLength))
+                {
+                    ResultsLabel.Text = "";
+                    if (randLength > 500)
+                    {
+                        ResultsLabel.Text = "Too big, max is 500. Now making 500. \n";
+                        randLength = 500;
+                    }
+                    var random = new System.Random();
+                    for (int c = 0; c < randLength; c++)
+                    {
+                        char randChar = (char)random.Next(33, 127);
+                        ResultsLabel.Text += randChar;
+                    }
+                }
+                else
+                {
+                    ResultsLabel.Text = $"{ScouterName.Text} died of fall damage. Keep Inventory is off.";
+                }
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "i have a complaint")
+            {
+                ResultsLabel.Text = "\" I have a complaint \" \nabout yourself?";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "beads")
+            {
+                ResultsLabel.Text = "Finn's favorite thing to do";
             }
             else
             {

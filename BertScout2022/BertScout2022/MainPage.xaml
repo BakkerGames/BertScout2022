@@ -700,6 +700,7 @@
                         />
                     </StackLayout>
                     <Label
+                        x:Name="credits"
                             TextColor="Green"
                             Text="Made by: Finn, Scott, and Keith"
                             />
