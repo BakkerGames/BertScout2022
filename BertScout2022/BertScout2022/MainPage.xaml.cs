@@ -101,6 +101,7 @@ namespace BertScout2022
                     SetState(2);
                     break;
                 case "Save":
+                    teamMatch.Deleted = false;
                     if (ScouterName.Text == null || ScouterName.Text.ToUpper() == "DELETE")
                     {
                         ScouterName.Text = teamMatch.ScouterName;
@@ -253,7 +254,7 @@ namespace BertScout2022
                 List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
                 foreach (TeamMatch match in deleteMatches)
                 {
-                    await App.Database.DeleteTeamMatchAsync(match);
+                    await App.Database.ActualDeleteMatch(match);
                 }
                 ResultsLabel.Text = "All matches deleted";
             }
@@ -405,6 +406,7 @@ namespace BertScout2022
         {
             if (Delete_Match_Password.Text == deleteMatchPassword)
             {
+                teamMatch.Deleted = true;
                 Climbed_Button_Background(-1);
                 Win_Tie_Lost_Button_Background(-1);
                 Rating_Button_Background(-1);
@@ -419,8 +421,15 @@ namespace BertScout2022
                 Moved_Off_Start(0);
                 ClimbRP_Output(0);
                 CargoRP_Output(0);
-                await App.Database.DeleteTeamMatchAsync(teamMatch);
                 SetState(0);
+                try
+                {
+                    _ = await App.Database.SaveTeamMatchAsync(teamMatch);
+                }
+                catch
+                {
+
+                }
             }
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
@@ -704,6 +713,7 @@ namespace BertScout2022
         private async void Button_ShowMatches(object sender, EventArgs e)
         {
             bool isTeamMatchNull = true;
+            int deletedMatches = 0;
             StringBuilder result = new StringBuilder();
             List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
             SortedList<string, TeamMatch> sorted = new SortedList<string, TeamMatch>();
@@ -714,13 +724,20 @@ namespace BertScout2022
             }
             foreach (TeamMatch match in sorted.Values)
             {
+                if (match.Deleted)
+                {
+                    deletedMatches++;
+                    continue;
+                }
                 string sentFlag = "  ";
                 if (!string.IsNullOrEmpty(match.AirtableId))
                 {
-                    sentFlag = match.Changed ? "- " : "* ";
+                    sentFlag = match.Changed ? "* " : "- ";
                 }
                 result.AppendLine($"{sentFlag}Match: {match.MatchNumber,3} - Team: {match.TeamNumber,4} - Scouter: {match.ScouterName}");
             }
+            if (deletedMatches == 1) result.AppendLine("1 deleted match");
+            if (deletedMatches > 1) result.AppendLine($"{deletedMatches} deleted matches");
             ResultsLabel.Text = result.ToString();
             if (isTeamMatchNull)
             {

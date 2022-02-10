@@ -12,6 +12,7 @@ namespace BertScout2022.Data.Models
         public string Uuid { get; set; }
         public string AirtableId { get; set; }
         public bool Changed { get; set; }
+        public bool Deleted { get; set; }
 
         [Indexed]
         public int TeamNumber { get; set; }

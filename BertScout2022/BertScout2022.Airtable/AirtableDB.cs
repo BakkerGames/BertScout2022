@@ -18,6 +18,7 @@ namespace BertScout2022.Airtable
             StringBuilder result = new StringBuilder();
             int NewCount = 0;
             int UpdatedCount = 0;
+            int deletedMatches = 0;
             List<Fields> newRecordList = new List<Fields>();
             List<IdFields> updatedRecordList = new List<IdFields>();
             FieldInfo[] myFieldInfo;
@@ -25,8 +26,14 @@ namespace BertScout2022.Airtable
             myFieldInfo = myType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
             using (AirtableBase airtableBase = new AirtableBase(AIRTABLE_KEY, AIRTABLE_BASE))
             {
+                deletedMatches = 0;
                 foreach (TeamMatch match in matches)
                 {
+                    if (match.Deleted)
+                    {
+                        deletedMatches++;
+                        continue;
+                    }
                     if (match.Uuid == null) continue;
                     if (string.IsNullOrEmpty(match.AirtableId))
                     {
@@ -41,11 +48,12 @@ namespace BertScout2022.Airtable
                             if (name.ToLower() == "id") continue;
                             if (name.ToLower() == "airtableid") continue;
                             if (name.ToLower() == "changed") continue;
+                            if (name.ToLower() == "deleted") continue;
                             fields.AddField(name, fi.GetValue(match));
                         }
                         newRecordList.Add(fields);
                     }
-                    else if (match.Changed)
+                    else if (match.Changed && !match.Deleted)
                     {
                         IdFields idFields = new IdFields(match.AirtableId);
                         foreach (FieldInfo fi in myFieldInfo)
@@ -58,38 +66,41 @@ namespace BertScout2022.Airtable
                             if (name.ToLower() == "id") continue;
                             if (name.ToLower() == "airtableid") continue;
                             if (name.ToLower() == "changed") continue;
+                            if (name.ToLower() == "deleted") continue;
                             idFields.AddField(name, fi.GetValue(match));
                         }
                         updatedRecordList.Add(idFields);
-                    }
-                }
-                if (newRecordList.Count > 0)
-                {
-                    int tempCount = await AirtableSendNewRecords(airtableBase, newRecordList, matches);
-                    if (tempCount < 0)
-                    {
-                        result.AppendLine("Error!");
-                        return result.ToString(); // error, exit out
-                    }
-                    NewCount += tempCount;
-                }
-                if (updatedRecordList.Count > 0)
-                {
-                    int tempCount = await AirtableSendUpdatedRecords(airtableBase, updatedRecordList);
-                    if (tempCount < 0)
-                    {
-                        result.AppendLine("Error!");
-                        return result.ToString(); // error, exit out
-                    }
-                    UpdatedCount += tempCount;
-                }
-            }
-            if (NewCount > 0) result.AppendLine($"Records added to Airtable: {NewCount}");
-            if (UpdatedCount > 0) result.AppendLine($"Records updated on Airtable: {UpdatedCount}");
-            if (NewCount + UpdatedCount == 0) result.AppendLine("No changes, nothing sent to Airtable");
-            return result.ToString();
-        }
 
+                    }
+                    if (newRecordList.Count > 0)
+                    {
+                        int tempCount = await AirtableSendNewRecords(airtableBase, newRecordList, matches);
+                        if (tempCount < 0)
+                        {
+                            result.AppendLine("Error!");
+                            return result.ToString(); // error, exit out
+                        }
+                        NewCount += tempCount;
+                    }
+                    if (updatedRecordList.Count > 0)
+                    {
+                        int tempCount = await AirtableSendUpdatedRecords(airtableBase, updatedRecordList);
+                        if (tempCount < 0)
+                        {
+                            result.AppendLine("Error!");
+                            return result.ToString(); // error, exit out
+                        }
+                        UpdatedCount += tempCount;
+                    }
+                }
+                if (deletedMatches == 1) result.AppendLine($"1 deleted match");
+                if (deletedMatches > 1) result.AppendLine($"{deletedMatches} deleted matches");
+                if (NewCount > 0) result.AppendLine($"Records added to Airtable: {NewCount}");
+                if (UpdatedCount > 0) result.AppendLine($"Records updated on Airtable: {UpdatedCount}");
+                if (NewCount + UpdatedCount == 0) result.AppendLine("No changes, nothing sent to Airtable");
+                return result.ToString();
+            }
+        }
         private static async Task<int> AirtableSendNewRecords(AirtableBase airtableBase,
                                                               List<Fields> newRecordList,
                                                               List<TeamMatch> matches)
