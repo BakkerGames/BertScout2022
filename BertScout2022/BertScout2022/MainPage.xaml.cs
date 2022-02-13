@@ -45,17 +45,17 @@ namespace BertScout2022
             }
         }
 
+        private void Message_Popup_Clicked_OK(object sender, EventArgs e)
+        {
+            Message_Popup.IsVisible = false;
+        }
+
         private async void MatchButton_Clicked(object sender, EventArgs e)
         {
             Delete_Match_Popup.IsVisible = false;
             switch (MatchButton.Text)
             {
                 case "Start":
-                    //if (string.IsNullOrEmpty(TeamNumber.Text) ||
-                    //    string.IsNullOrEmpty(MatchNumber.Text))
-                    //{
-                    //    return;
-                    //}
                     int team;
                     int match;
                     if (!int.TryParse(TeamNumber.Text, out team) ||
@@ -107,11 +107,13 @@ namespace BertScout2022
                     SaveAllFields(teamMatch);
                     try
                     {
-                        _ = await App.Database.SaveTeamMatchAsync(teamMatch);
+                        await App.Database.SaveTeamMatchAsync(teamMatch);
                     }
                     catch (Exception)
                     {
-                        //todo add error message
+                        Message_Popup_Label.Text = "Error saving match";
+                        Message_Popup.IsVisible = true;
+                        return;
                     }
                     ClearAllFields();
                     SetState(0);
@@ -250,25 +252,43 @@ namespace BertScout2022
         }
         private async void Delete_All_Matches_Clicked(object sender, EventArgs e)
         {
-            if (DeleteAllMatchesPassword.Text.ToLower() == Constants.deleteAllMatchesPassword)
+            if (Base64StringEncode(DeleteAllMatchesPassword.Text.ToLower()) == Constants.deleteAllMatchesPassword)
             {
-                List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
-                foreach (TeamMatch match in deleteMatches)
+                try
                 {
-                    await App.Database.ActualDeleteMatchAsync(match);
+                    List<TeamMatch> deleteMatches = await App.Database.GetTeamMatchesAsync();
+                    foreach (TeamMatch match in deleteMatches)
+                    {
+                        await App.Database.ActualDeleteMatchAsync(match);
+                    }
+                }
+                catch (Exception)
+                {
+                    Message_Popup_Label.Text = "Error deleting all matches";
+                    Message_Popup.IsVisible = true;
+                    return;
                 }
                 ResultsLabel.Text = "All matches deleted";
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "reset")
             {
-                List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
-                foreach (TeamMatch match in matches)
+                try
                 {
-                    match.AirtableId = null;
-                    match.Changed = false;
-                    await App.Database.SaveTeamMatchAsync(match);
+                    List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+                    foreach (TeamMatch match in matches)
+                    {
+                        match.AirtableId = null;
+                        match.Changed = false;
+                        await App.Database.SaveTeamMatchAsync(match);
+                    }
+                    ResultsLabel.Text = "All AirtableIds cleared";
                 }
-                ResultsLabel.Text = "All AirtableIds cleared";
+                catch (Exception)
+                {
+                    Message_Popup_Label.Text = "Error resetting matches";
+                    Message_Popup.IsVisible = true;
+                    return;
+                }
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "undelete")
             {
@@ -279,7 +299,7 @@ namespace BertScout2022
                     if (match.Deleted)
                     {
                         match.Deleted = false;
-                        match.Changed = false;
+                        match.Changed = true;
                         await App.Database.SaveTeamMatchAsync(match);
                         undeleteCount++;
                     }
@@ -299,7 +319,7 @@ namespace BertScout2022
             {
                 int zero = 0;
                 zero = (1 / zero);
-                ResultsLabel.Text = zero.ToString();
+                ResultsLabel.Text = zero.ToString(); // this will never happen
             }
             else if (DeleteAllMatchesPassword.Text.ToLower().StartsWith("random"))
             {
@@ -427,6 +447,7 @@ namespace BertScout2022
                 teamMatch.Deleted = true;
                 await App.Database.SaveTeamMatchAsync(teamMatch);
                 ClearAllFields();
+                SetState(0);
             }
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
@@ -740,6 +761,15 @@ namespace BertScout2022
             {
                 ResultsLabel.Text = "No matches in database";
             }
+        }
+
+        private string Base64StringEncode(string originalString)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(originalString);
+
+            string encodedString = Convert.ToBase64String(bytes);
+
+            return encodedString;
         }
     }
 }

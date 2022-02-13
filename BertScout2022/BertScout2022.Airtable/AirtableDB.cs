@@ -10,8 +10,6 @@ namespace BertScout2022.Airtable
 {
     public class AirtableDB
     {
-        private const string AIRTABLE_BASE = "appSYiC3Jj92HrBBS";
-        private const string AIRTABLE_KEY = "keyIlZIGEOtUMLKSY";
 
         public static async Task<string> AirtableSendRecords(List<TeamMatch> matches)
         {
@@ -23,7 +21,7 @@ namespace BertScout2022.Airtable
             FieldInfo[] myFieldInfo;
             Type myType = typeof(TeamMatch);
             myFieldInfo = myType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-            using (AirtableBase airtableBase = new AirtableBase(AIRTABLE_KEY, AIRTABLE_BASE))
+            using (AirtableBase airtableBase = new AirtableBase(Constants.AIRTABLE_KEY, Constants.AIRTABLE_BASE))
             {
                 foreach (TeamMatch match in matches)
                 {
