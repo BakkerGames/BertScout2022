@@ -497,6 +497,19 @@
                         />
                         <!--add results fields here-->
                         <StackLayout Orientation="Horizontal">
+                            <Label
+                                TextColor="#008000"
+                                WidthRequest="200"
+                                Text = "Alliance Score:"
+                                />
+                            <Entry
+                                x:Name="AllianceScore"
+                                TextColor="#008000"
+                                WidthRequest="200"
+                                Keyboard="Numeric"
+                                />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
                             <Label 
                                 TextColor="Green"
                                 Text="Match Result:"

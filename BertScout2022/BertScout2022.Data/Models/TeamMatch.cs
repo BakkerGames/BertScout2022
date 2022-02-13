@@ -35,6 +35,7 @@ namespace BertScout2022.Data.Models
         public int ClimbLevel { get; set; }
 
         // overall
+        public int AllianceScore { get; set; }
         public int MatchRP { get; set; } // 0=Lost, 1=Tie, 2=Win
         public int CargoRP { get; set; }
         public int ClimbRP { get; set; }
