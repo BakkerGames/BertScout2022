@@ -14,6 +14,7 @@ namespace BertScout2022
         private bool greenMode = false;
         private bool darkGreenMode = false;
         private bool darkMode = false;
+        private int isItThough = 0;
         public static Color UnselectedButtonColor = Color.FromHex("#bfbfbf");
         public static Color SelectedButtonColor = Color.FromHex("#008000");
 
@@ -148,6 +149,7 @@ namespace BertScout2022
             CargoRP_Output(0);
             Comments.Text = "";
             Delete_Match_Password.Text = "";
+            AllianceScore.Text = "";
         }
 
         private void FillAllFields(TeamMatch item)
@@ -166,18 +168,21 @@ namespace BertScout2022
             Comments.Text = item.Comments;
             ClimbRP_Output(teamMatch.ClimbRP);
             CargoRP_Output(teamMatch.CargoRP);
+            AllianceScore.Text = item.AllianceScore.ToString();
         }
 
         private void SaveAllFields(TeamMatch match)
         {
+            int temp = 0;
             if (!string.IsNullOrWhiteSpace(ScouterName.Text))
             {
                 match.ScouterName = ScouterName.Text;
             }
             if (AllianceScore.Text != null)
             {
-                    match.AllianceScore = int.Parse(AllianceScore.Text);
+                if (!int.TryParse(AllianceScore.Text, out temp)) temp = 0;
             }
+            match.AllianceScore = temp;
             match.Comments = Comments.Text;
             match.Changed = true;
         }
@@ -265,6 +270,7 @@ namespace BertScout2022
         }
         private async void Delete_All_Matches_Clicked(object sender, EventArgs e)
         {
+            ResultsLabel.Text = "";
             if (Base64StringEncode(DeleteAllMatchesPassword.Text.ToLower()) == Constants.deleteAllMatchesPassword)
             {
                 try
@@ -369,6 +375,64 @@ namespace BertScout2022
             else if (DeleteAllMatchesPassword.Text.ToLower() == "beads")
             {
                 ResultsLabel.Text = "Finn's favorite thing to do";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "error")
+            {
+                ResultsLabel.Text = "Error \nWhat did you expect?";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "nick")
+            {
+                ResultsLabel.Text = "This is a triumph";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "screaming")
+            {
+                Random random = new Random();
+                int r = random.Next();
+                if (r > 500) r = 500;
+                for (int scp = 0; scp < r; scp++) {
+                    ResultsLabel.Text += "A";
+                }
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "wrong password")
+            {
+                isItThough++;
+                if (isItThough == 10)
+                {
+                    ResultsLabel.Text = "Shoo";
+                }
+                else if (isItThough == 20)
+                {
+                    ResultsLabel.Text = "SHoo";
+                }
+                else if (isItThough == 30)
+                {
+                    ResultsLabel.Text = "SHOo";
+                }
+                else if (isItThough == 40)
+                {
+                    ResultsLabel.Text = "sh0E";
+                }
+                else if (isItThough == 50)
+                {
+                    ResultsLabel.Text = "Why";
+                    isItThough = 0;
+                }
+                else
+                {
+                    ResultsLabel.Text = "Are you sure about that?";
+                }
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "nothing")
+            {
+                ResultsLabel.Text = "wrong Password";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "a")
+            {
+                ResultsLabel.Text = "screaming";
+            }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "mirror")
+            {
+                ResultsLabel.Text = "drowssap gnorW";
             }
             else
             {
