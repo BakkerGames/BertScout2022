@@ -355,7 +355,7 @@ namespace BertScout2022
                 }
                 else
                 {
-                    ResultsLabel.Text = $"{ScouterName.Text} died of fall damage. Keep Inventory is off.";
+                    ResultsLabel.Text = $"{ScouterName.Text} died of fall damage.";
                 }
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "i have a complaint")
