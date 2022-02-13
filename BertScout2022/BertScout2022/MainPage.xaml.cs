@@ -67,7 +67,16 @@ namespace BertScout2022
                     {
                         return;
                     }
-                    teamMatch = await App.Database.GetTeamMatchAsync(team, match);
+                    try
+                    {
+                        teamMatch = await App.Database.GetTeamMatchAsync(team, match);
+                    }
+                    catch (Exception)
+                    {
+                        Message_Popup_Label.Text = "Error getting match";
+                        Message_Popup.IsVisible = true;
+                        return;
+                    }
                     if (ScouterName.Text != null)
                     {
                         if (ScouterName.Text.ToUpper() == "DELETE")
@@ -265,8 +274,7 @@ namespace BertScout2022
                 }
                 catch (Exception)
                 {
-                    Message_Popup_Label.Text = "Error deleting all matches";
-                    Message_Popup.IsVisible = true;
+                    ResultsLabel.Text = "Error deleting all matches";
                     return;
                 }
                 ResultsLabel.Text = "All matches deleted";
@@ -286,27 +294,34 @@ namespace BertScout2022
                 }
                 catch (Exception)
                 {
-                    Message_Popup_Label.Text = "Error resetting matches";
-                    Message_Popup.IsVisible = true;
+                    ResultsLabel.Text = "Error resetting matches";
                     return;
                 }
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "undelete")
             {
-                int undeleteCount = 0;
-                List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
-                foreach (TeamMatch match in matches)
+                try
                 {
-                    if (match.Deleted)
+                    int undeleteCount = 0;
+                    List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+                    foreach (TeamMatch match in matches)
                     {
-                        match.Deleted = false;
-                        match.Changed = true;
-                        await App.Database.SaveTeamMatchAsync(match);
-                        undeleteCount++;
+                        if (match.Deleted)
+                        {
+                            match.Deleted = false;
+                            match.Changed = true;
+                            await App.Database.SaveTeamMatchAsync(match);
+                            undeleteCount++;
+                        }
                     }
+                    string s = undeleteCount == 1 ? "" : "s";
+                    ResultsLabel.Text = $"There were {undeleteCount} record{s} undeleted";
                 }
-                string s = undeleteCount == 1 ? "" : "s";
-                ResultsLabel.Text = $"There were {undeleteCount} record{s} undeleted";
+                catch (Exception)
+                {
+                    ResultsLabel.Text = "Error undeleting all matches";
+                    return;
+                }
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "hi")
             {
@@ -341,7 +356,7 @@ namespace BertScout2022
                 }
                 else
                 {
-                    ResultsLabel.Text = $"{ScouterName.Text} died of fall damage. Keep Inventory is off.";
+                    ResultsLabel.Text = $"{ScouterName.Text} died of fall damage.";
                 }
             }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "i have a complaint")
@@ -445,10 +460,19 @@ namespace BertScout2022
         {
             if (Delete_Match_Password.Text == Constants.deleteMatchPassword)
             {
-                teamMatch.Deleted = true;
-                await App.Database.SaveTeamMatchAsync(teamMatch);
-                ClearAllFields();
-                SetState(0);
+                try
+                {
+                    teamMatch.Deleted = true;
+                    await App.Database.SaveTeamMatchAsync(teamMatch);
+                    ClearAllFields();
+                    SetState(0);
+                }
+                catch (Exception)
+                {
+                    Message_Popup_Label.Text = "Error saving match";
+                    Message_Popup.IsVisible = true;
+                    return;
+                }
             }
         }
         private void Moved_Off_Start_Clicked(object sender, EventArgs e)
