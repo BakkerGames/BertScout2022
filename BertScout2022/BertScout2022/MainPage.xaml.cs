@@ -270,6 +270,23 @@ namespace BertScout2022
                 }
                 ResultsLabel.Text = "All AirtableIds cleared";
             }
+            else if (DeleteAllMatchesPassword.Text.ToLower() == "undelete")
+            {
+                int undeleteCount = 0;
+                List<TeamMatch> matches = await App.Database.GetTeamMatchesAsync();
+                foreach (TeamMatch match in matches)
+                {
+                    if (match.Deleted)
+                    {
+                        match.Deleted = false;
+                        match.Changed = false;
+                        await App.Database.SaveTeamMatchAsync(match);
+                        undeleteCount++;
+                    }
+                }
+                string s = undeleteCount == 1 ? "" : "s";
+                ResultsLabel.Text = $"There were {undeleteCount} record{s} undeleted";
+            }
             else if (DeleteAllMatchesPassword.Text.ToLower() == "hi")
             {
                 ResultsLabel.Text = "hi";
