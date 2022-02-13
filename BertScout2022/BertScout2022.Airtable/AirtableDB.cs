@@ -18,7 +18,6 @@ namespace BertScout2022.Airtable
             StringBuilder result = new StringBuilder();
             int NewCount = 0;
             int UpdatedCount = 0;
-            int deletedMatches = 0;
             List<Fields> newRecordList = new List<Fields>();
             List<IdFields> updatedRecordList = new List<IdFields>();
             FieldInfo[] myFieldInfo;
@@ -26,12 +25,10 @@ namespace BertScout2022.Airtable
             myFieldInfo = myType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
             using (AirtableBase airtableBase = new AirtableBase(AIRTABLE_KEY, AIRTABLE_BASE))
             {
-                deletedMatches = 0;
                 foreach (TeamMatch match in matches)
                 {
                     if (match.Deleted)
                     {
-                        deletedMatches++;
                         continue;
                     }
                     if (match.Uuid == null) continue;
@@ -93,8 +90,6 @@ namespace BertScout2022.Airtable
                         UpdatedCount += tempCount;
                     }
                 }
-                if (deletedMatches == 1) result.AppendLine($"1 deleted match");
-                if (deletedMatches > 1) result.AppendLine($"{deletedMatches} deleted matches");
                 if (NewCount > 0) result.AppendLine($"Records added to Airtable: {NewCount}");
                 if (UpdatedCount > 0) result.AppendLine($"Records updated on Airtable: {UpdatedCount}");
                 if (NewCount + UpdatedCount == 0) result.AppendLine("No changes, nothing sent to Airtable");

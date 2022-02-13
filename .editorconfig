@@ -8,3 +8,6 @@ dotnet_diagnostic.IDE0047.severity = none
 
 # IDE0011: Add braces
 dotnet_diagnostic.IDE0011.severity = none
+
+# IDE0045: Convert to conditional expression
+dotnet_diagnostic.IDE0045.severity = none
