@@ -74,7 +74,7 @@ namespace BertScout2022.Data
             }
             return await _database.InsertOrReplaceAsync(item);
         }
-        public async Task<int> ActualDeleteMatch(TeamMatch item)
+        public async Task<int> ActualDeleteMatchAsync(TeamMatch item)
         {
             if (item.Uuid == null)
             {
