@@ -165,7 +165,10 @@ namespace BertScout2022
             {
                 match.ScouterName = ScouterName.Text;
             }
-            match.AllianceScore = int.Parse(AllianceScore.Text);
+            if (AllianceScore.Text != null)
+            {
+                    match.AllianceScore = int.Parse(AllianceScore.Text);
+            }
             match.Comments = Comments.Text;
             match.Changed = true;
         }
