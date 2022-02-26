@@ -21,6 +21,7 @@ namespace BertScout2022
         {
             InitializeComponent();
             SetState(0);
+            appVersion.Text = Constants.version;
         }
 
         private void MenuButton_Clicked(object sender, EventArgs e)

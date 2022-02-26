@@ -713,7 +713,9 @@
                             Clicked="Dark_Mode_Clicked"
                             />
                     </AbsoluteLayout>
-                    <AbsoluteLayout>
+                    <AbsoluteLayout
+                        HorizontalOptions="Center"
+                        >
                         <Button
                             x:Name="DeleteAllMatches"
                             WidthRequest="250"
@@ -751,8 +753,15 @@
                     </StackLayout>
                     <Label
                         x:Name="credits"
+                            HorizontalOptions="Center"
                             TextColor="Green"
                             Text="Made by: Finn, Scott, and Keith"
+                            />
+                    <Label
+                        x:Name="appVersion"
+                            HorizontalOptions="Center"
+                            TextColor="Green"
+                            Text="***version***"
                             />
                 </StackLayout>
             </ScrollView>
